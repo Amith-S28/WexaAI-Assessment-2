@@ -1,5 +1,11 @@
 # PaperFlow: Research Paper Citation Network & Gap Finder
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-paperflow--28th.onrender.com-0075de?style=for-the-badge&logo=render&logoColor=white)](https://paperflow-28th.onrender.com/)
+[![Database](https://img.shields.io/badge/Database-CognoDB_Cloud_(Bolt_5.x)-10B981?style=for-the-badge&logo=neo4j&logoColor=white)](https://paperflow-28th.onrender.com/api/health)
+[![License](https://img.shields.io/badge/License-MIT-gray?style=for-the-badge)](LICENSE)
+
+> 🌐 **Live Hosted Application**: [https://paperflow-28th.onrender.com/](https://paperflow-28th.onrender.com/)
+
 An interactive, high-performance graph database application built on **CognoDB Cloud** (openCypher over Bolt protocol) and powered by **Semantic Scholar** academic literature metadata. It models multi-entity academic relationships across papers, authors, and methodologies, computing **multi-hop citation lineages (1–4 hops)**, **interdisciplinary bridge detection**, and **triadic research gap closures**.
 
 ---
