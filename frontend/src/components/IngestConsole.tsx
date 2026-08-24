@@ -42,45 +42,40 @@ export const IngestConsole: React.FC<IngestConsoleProps> = ({ onIngestSuccess })
   };
 
   return (
-    <div style={{ maxWidth: '920px', margin: '0 auto', padding: '32px 24px' }}>
-      <div className="aura-panel" style={{ padding: '28px 32px', marginBottom: '24px', background: '#FFFFFF' }}>
+    <div style={{ maxWidth: '840px', margin: '0 auto', padding: '28px 24px' }}>
+      <div className="aura-panel" style={{ padding: '24px 28px', marginBottom: '20px', background: '#FFFFFF' }}>
         <h2 style={{
           fontFamily: 'var(--font-display)',
-          fontSize: '20px',
+          fontSize: '18px',
           fontWeight: 700,
-          color: 'var(--text-primary)',
+          color: 'var(--ink)',
           letterSpacing: '-0.02em',
-          marginBottom: '20px',
+          marginBottom: '18px',
           display: 'flex',
           alignItems: 'center',
           gap: '8px'
         }}>
-          <DownloadCloud size={18} color="var(--primary)" /> Ingest Papers
+          <DownloadCloud size={17} color="var(--primary)" /> Academic Paper Ingestion
         </h2>
 
         {/* Form */}
-        <form onSubmit={handleIngest} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+        <form onSubmit={handleIngest} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div>
-            <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-primary)', display: 'block', marginBottom: '6px', fontFamily: 'var(--font-display)' }}>
-              Search Query / Keyword:
+            <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--ink-secondary)', display: 'block', marginBottom: '6px', fontFamily: 'var(--font-display)' }}>
+              Search Query / Academic Keyword:
             </label>
             <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-              <Search size={15} style={{ position: 'absolute', left: '14px', color: 'var(--text-muted)' }} />
+              <Search size={14} style={{ position: 'absolute', left: '12px', color: 'var(--ink-muted)' }} />
               <input
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="e.g. Mamba State Space Models, Graph Neural Networks, NeRF..."
+                placeholder="e.g. Mamba State Space Models, Graph Neural Networks..."
+                className="notion-input"
                 style={{
                   width: '100%',
-                  background: 'var(--surface)',
-                  border: '1px solid var(--border)',
-                  borderRadius: 'var(--radius-control)',
-                  padding: '11px 14px 11px 40px',
-                  color: 'var(--text-primary)',
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '13px',
-                  outline: 'none'
+                  paddingLeft: '34px',
+                  fontSize: '13px'
                 }}
               />
             </div>
@@ -88,7 +83,7 @@ export const IngestConsole: React.FC<IngestConsoleProps> = ({ onIngestSuccess })
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '14px' }}>
             {/* Limit Selector */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: 'var(--text-secondary)', fontFamily: 'var(--font-display)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: 'var(--ink-secondary)', fontFamily: 'var(--font-display)' }}>
               <span>Fetch Count:</span>
               {[3, 5, 10, 15].map((num) => (
                 <button
@@ -96,15 +91,16 @@ export const IngestConsole: React.FC<IngestConsoleProps> = ({ onIngestSuccess })
                   type="button"
                   onClick={() => setLimit(num)}
                   style={{
-                    background: limit === num ? 'var(--primary)' : 'var(--surface)',
-                    border: limit === num ? '1px solid var(--primary)' : '1px solid var(--border)',
-                    color: limit === num ? '#FFFFFF' : 'var(--text-secondary)',
-                    padding: '5px 12px',
-                    borderRadius: 'var(--radius-control)',
+                    background: limit === num ? 'var(--primary)' : 'var(--canvas-soft)',
+                    border: limit === num ? '1px solid var(--primary)' : '1px solid var(--hairline)',
+                    color: limit === num ? '#FFFFFF' : 'var(--ink-secondary)',
+                    padding: '4px 10px',
+                    borderRadius: 'var(--radius-pill)',
                     fontSize: '11px',
                     fontFamily: 'var(--font-mono)',
                     fontWeight: 600,
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    transition: 'all 0.12s ease'
                   }}
                 >
                   {num} papers
@@ -113,14 +109,14 @@ export const IngestConsole: React.FC<IngestConsoleProps> = ({ onIngestSuccess })
             </div>
 
             {/* Include 1-Hop References checkbox */}
-            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: 'var(--text-primary)', cursor: 'pointer', fontFamily: 'var(--font-display)' }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: 'var(--ink-secondary)', cursor: 'pointer', fontFamily: 'var(--font-display)' }}>
               <input
                 type="checkbox"
                 checked={includeReferences}
                 onChange={(e) => setIncludeReferences(e.target.checked)}
-                style={{ accentColor: 'var(--primary)', width: '15px', height: '15px' }}
+                style={{ accentColor: 'var(--primary)' }}
               />
-              <span>Include 1-Hop Reference Links</span>
+              <span>Include 1-Hop References</span>
             </label>
           </div>
 
@@ -130,104 +126,73 @@ export const IngestConsole: React.FC<IngestConsoleProps> = ({ onIngestSuccess })
             className="aura-btn-primary"
             style={{
               justifyContent: 'center',
-              padding: '12px 20px',
+              padding: '10px 18px',
               fontSize: '13px',
+              borderRadius: 'var(--radius-pill)',
               cursor: isLoading ? 'not-allowed' : 'pointer'
             }}
           >
-            <DownloadCloud size={16} />
-            {isLoading ? 'Streaming & Upserting to CognoDB...' : 'Ingest to CognoDB Cloud'}
+            <DownloadCloud size={15} />
+            {isLoading ? 'Streaming & Ingesting to CognoDB...' : 'Ingest to CognoDB Cloud'}
           </button>
         </form>
 
-        {/* Quick Suggestion Chips */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '18px', fontSize: '11px', color: 'var(--text-muted)', flexWrap: 'wrap' }}>
-          <span style={{ fontFamily: 'var(--font-display)' }}>Try topics:</span>
-          {[
-            'DeepSeek V3 Architecture',
-            'Diffusion Models in Healthcare',
-            'Graph Neural Networks for Drug Discovery',
-            'FlashAttention IO-aware',
-          ].map((topic, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => setQuery(topic)}
-              style={{
-                background: 'var(--surface)',
-                border: '1px solid var(--border)',
-                color: 'var(--text-secondary)',
-                padding: '4px 10px',
-                borderRadius: 'var(--radius-control)',
-                fontSize: '11px',
-                fontFamily: 'var(--font-body)',
-                cursor: 'pointer'
-              }}
-            >
-              {topic}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Result Status Box */}
-      {result && (
-        <div className="aura-panel" style={{
-          padding: '20px 24px',
-          border: result.success ? '1px solid #10B981' : '1px solid #EF4444',
-          background: '#FFFFFF'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-            {result.success ? (
-              <CheckCircle2 size={20} color="#10B981" />
-            ) : (
-              <AlertCircle size={20} color="#EF4444" />
-            )}
-            <h3 style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: '15px',
-              fontWeight: 700,
-              color: result.success ? '#065F46' : '#991B1B'
-            }}>
-              {result.success ? 'Ingestion Batch Succeeded' : 'Ingestion Notice'}
-            </h3>
+        {/* Error Alert */}
+        {error && (
+          <div style={{
+            marginTop: '16px',
+            padding: '10px 14px',
+            background: '#fff5f5',
+            border: '1px solid #ffd1d1',
+            borderRadius: 'var(--radius-md)',
+            color: '#c53030',
+            fontSize: '12px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}>
+            <AlertCircle size={15} />
+            <span>{error}</span>
           </div>
+        )}
 
-          <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '16px', fontFamily: 'var(--font-body)' }}>
-            {result.message}
-          </p>
-
-          {result.success && (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
-              <div className="aura-card" style={{ padding: '12px', textAlign: 'center' }}>
-                <div style={{ fontSize: '20px', fontWeight: 800, color: 'var(--primary)', fontFamily: 'var(--font-mono)' }}>{result.imported_papers}</div>
-                <div style={{ fontSize: '11px', color: 'var(--text-secondary)', fontFamily: 'var(--font-display)' }}>Papers</div>
-              </div>
-              <div className="aura-card" style={{ padding: '12px', textAlign: 'center' }}>
-                <div style={{ fontSize: '20px', fontWeight: 800, color: 'var(--primary)', fontFamily: 'var(--font-mono)' }}>{result.imported_authors}</div>
-                <div style={{ fontSize: '11px', color: 'var(--text-secondary)', fontFamily: 'var(--font-display)' }}>Authors</div>
-              </div>
-              <div className="aura-card" style={{ padding: '12px', textAlign: 'center' }}>
-                <div style={{ fontSize: '20px', fontWeight: 800, color: '#10B981', fontFamily: 'var(--font-mono)' }}>{result.imported_concepts}</div>
-                <div style={{ fontSize: '11px', color: 'var(--text-secondary)', fontFamily: 'var(--font-display)' }}>Concepts</div>
-              </div>
-              <div className="aura-card" style={{ padding: '12px', textAlign: 'center' }}>
-                <div style={{ fontSize: '20px', fontWeight: 800, color: 'var(--primary)', fontFamily: 'var(--font-mono)' }}>{result.imported_citations}</div>
-                <div style={{ fontSize: '11px', color: 'var(--text-secondary)', fontFamily: 'var(--font-display)' }}>Citations</div>
-              </div>
+        {/* Success / Result Feedback */}
+        {result && (
+          <div style={{
+            marginTop: '16px',
+            padding: '14px 16px',
+            background: '#f0fdf4',
+            border: '1px solid #bbf7d0',
+            borderRadius: 'var(--radius-md)',
+            color: '#166534'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+              <CheckCircle2 size={16} color="#16a34a" />
+              <strong style={{ fontSize: '13px' }}>Ingestion Complete!</strong>
             </div>
-          )}
-        </div>
-      )}
 
-      {error && (
-        <div className="aura-panel" style={{ padding: '18px', border: '1px solid #EF4444', background: '#FFFFFF' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#EF4444', fontWeight: 700, marginBottom: '6px', fontFamily: 'var(--font-display)' }}>
-            <AlertCircle size={16} /> Ingestion Error
+            <div style={{
+              display: 'flex',
+              gap: '14px',
+              fontSize: '12px',
+              fontFamily: 'var(--font-mono)',
+              marginTop: '8px',
+              color: '#15803d'
+            }}>
+              <div>📄 Papers: <strong>{result.imported_papers}</strong></div>
+              <div>👥 Authors: <strong>{result.imported_authors}</strong></div>
+              <div>🔗 Citations: <strong>{result.imported_citations}</strong></div>
+              <div>🏷️ Concepts: <strong>{result.imported_concepts}</strong></div>
+            </div>
+
+            {result.message && (
+              <div style={{ marginTop: '10px', fontSize: '12px', color: '#15803d', borderTop: '1px solid #dcfce7', paddingTop: '8px' }}>
+                {result.message}
+              </div>
+            )}
           </div>
-          <p style={{ fontSize: '12px', color: '#991B1B', fontFamily: 'var(--font-body)' }}>{error}</p>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

@@ -95,14 +95,14 @@ export const LineageView: React.FC<LineageViewProps> = ({
           id: e.id,
           source: e.source,
           target: e.target,
-          type: 'straight',
+          type: 'smoothstep',
           animated: true,
-          style: { stroke: '#E65C00', strokeWidth: 2.5 },
+          style: { stroke: '#0075de', strokeWidth: 2 },
           markerEnd: {
             type: MarkerType.ArrowClosed,
             width: 14,
             height: 14,
-            color: '#E65C00',
+            color: '#0075de',
           },
         }));
 
@@ -124,46 +124,40 @@ export const LineageView: React.FC<LineageViewProps> = ({
       {/* Sidebar Controls & Ancestor Chains */}
       <div style={{
         width: '370px',
-        borderRight: '1px solid var(--border)',
+        borderRight: '1px solid var(--hairline)',
         background: '#FFFFFF',
         display: 'flex',
         flexDirection: 'column',
         zIndex: 10
       }}>
         {/* Top Filter Selection */}
-        <div style={{ padding: '20px 20px', borderBottom: '1px solid var(--border)' }}>
+        <div style={{ padding: '20px 20px', borderBottom: '1px solid var(--hairline)' }}>
           <h2 style={{
             fontFamily: 'var(--font-display)',
             fontSize: '15px',
             fontWeight: 700,
-            color: 'var(--text-primary)',
+            color: 'var(--ink)',
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
             marginBottom: '16px'
           }}>
-            <GitFork size={17} color="var(--primary)" /> Multi-Hop Citation Lineage
+            <GitFork size={16} color="var(--primary)" /> Citation Lineage
           </h2>
 
           {/* Select Paper */}
           <div style={{ marginBottom: '16px' }}>
-            <label style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 600, display: 'block', marginBottom: '6px', fontFamily: 'var(--font-display)' }}>
+            <label style={{ fontSize: '12px', color: 'var(--ink-secondary)', fontWeight: 600, display: 'block', marginBottom: '6px', fontFamily: 'var(--font-display)' }}>
               Select Origin Paper:
             </label>
             <select
               value={selectedPaperId}
               onChange={(e) => setSelectedPaperId(e.target.value)}
+              className="notion-input"
               style={{
                 width: '100%',
-                background: 'var(--surface)',
-                border: '1px solid var(--border)',
-                color: 'var(--text-primary)',
-                padding: '9px 12px',
-                borderRadius: 'var(--radius-control)',
-                fontSize: '13px',
-                fontFamily: 'var(--font-body)',
-                outline: 'none',
-                cursor: 'pointer'
+                fontWeight: 500,
+                fontSize: '13px'
               }}
             >
               {papers.map((p) => (
@@ -174,20 +168,24 @@ export const LineageView: React.FC<LineageViewProps> = ({
             </select>
           </div>
 
-          {/* Max Depth Slider */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '12px', color: 'var(--text-secondary)' }}>
-            <span style={{ fontFamily: 'var(--font-display)' }}>Max Ancestry Hops:</span>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <input
-                type="range"
-                min="1"
-                max="4"
-                value={maxDepth}
-                onChange={(e) => setMaxDepth(Number(e.target.value))}
-                style={{ width: '85px', accentColor: 'var(--primary)' }}
-              />
-              <strong className="aura-tag-mono">{maxDepth} hops</strong>
+          {/* Depth Slider */}
+          <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+              <label style={{ fontSize: '12px', color: 'var(--ink-secondary)', fontWeight: 600, fontFamily: 'var(--font-display)' }}>
+                Upstream Depth:
+              </label>
+              <span className="aura-tag-mono" style={{ fontSize: '11px' }}>
+                {maxDepth} {maxDepth === 1 ? 'Hop' : 'Hops'}
+              </span>
             </div>
+            <input
+              type="range"
+              min="1"
+              max="4"
+              value={maxDepth}
+              onChange={(e) => setMaxDepth(Number(e.target.value))}
+              style={{ width: '100%', accentColor: 'var(--primary)', cursor: 'pointer' }}
+            />
           </div>
         </div>
 

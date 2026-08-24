@@ -7,7 +7,8 @@ import {
   DownloadCloud,
   Activity,
   RotateCcw,
-  FileSpreadsheet
+  ChevronRight,
+  Database
 } from 'lucide-react';
 import type { HealthStatus } from '../types';
 
@@ -31,57 +32,78 @@ export const Navbar: React.FC<NavbarProps> = ({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      padding: '12px 28px',
+      padding: '10px 24px',
       background: '#FFFFFF',
-      borderBottom: '1px solid var(--border)',
+      borderBottom: '1px solid var(--hairline)',
       position: 'sticky',
       top: 0,
       zIndex: 50,
-      boxShadow: 'var(--shadow-control)'
+      boxShadow: '0 1px 2px rgba(0, 0, 0, 0.02)'
     }}>
-      {/* Brand */}
+      {/* Notion Workspace & Breadcrumbs */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        {/* Notion Official "N" Cube Monogram */}
         <div style={{
-          background: 'var(--primary)',
-          padding: '7px',
-          borderRadius: 'var(--radius-control)',
+          width: '28px',
+          height: '28px',
+          borderRadius: '5px',
+          background: '#000000',
+          color: '#FFFFFF',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          border: '1px solid #111827'
+          fontFamily: 'var(--font-display)',
+          fontWeight: 800,
+          fontSize: '16px',
+          letterSpacing: '-0.05em',
+          userSelect: 'none',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
         }}>
-          <FileSpreadsheet size={16} color="#FFFFFF" strokeWidth={2.2} />
+          N
         </div>
-        <div>
-          <h1 style={{
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <span style={{
             fontFamily: 'var(--font-display)',
-            fontSize: '16px',
-            fontWeight: 700,
-            letterSpacing: '-0.02em',
-            color: 'var(--text-primary)',
-            margin: 0
+            fontSize: '14px',
+            fontWeight: 600,
+            color: 'var(--ink)',
+            letterSpacing: '-0.01em'
           }}>
-            PaperFlow
-          </h1>
+            Notion
+          </span>
+          <ChevronRight size={14} color="var(--ink-faint)" />
+          <span style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: '14px',
+            fontWeight: 500,
+            color: 'var(--ink-secondary)',
+            letterSpacing: '-0.01em',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '5px'
+          }}>
+            <Database size={13} color="var(--primary)" /> PaperFlow Graph
+          </span>
         </div>
       </div>
 
-      {/* Nav Tabs */}
+      {/* Notion Navigation Views Switcher */}
       <nav style={{
         display: 'flex',
         alignItems: 'center',
-        gap: '4px',
-        background: 'var(--surface)',
+        gap: '2px',
+        background: 'var(--canvas-soft)',
         padding: '3px',
-        borderRadius: 'var(--radius-pill)',
-        border: '1px solid var(--border)'
+        borderRadius: 'var(--radius-md)',
+        border: '1px solid var(--hairline)'
       }}>
         {[
-          { id: 'explorer', label: 'Explorer', icon: Share2 },
-          { id: 'lineage', label: 'Lineage', icon: GitFork },
-          { id: 'gaps', label: 'Gap Finder', icon: Sparkles },
-          { id: 'bridges', label: 'Bridges', icon: Waypoints },
-          { id: 'ingest', label: 'Ingest', icon: DownloadCloud },
+          { id: 'explorer', label: 'Graph Explorer', icon: Share2 },
+          { id: 'lineage', label: 'Citation Lineage', icon: GitFork },
+          { id: 'gaps', label: 'Research Gaps', icon: Sparkles },
+          { id: 'bridges', label: 'Domain Bridges', icon: Waypoints },
+          { id: 'ingest', label: 'Ingest Papers', icon: DownloadCloud },
         ].map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -93,68 +115,69 @@ export const Navbar: React.FC<NavbarProps> = ({
                 display: 'flex',
                 alignItems: 'center',
                 gap: '6px',
-                padding: '6px 14px',
-                borderRadius: 'var(--radius-pill)',
-                fontSize: '12px',
+                padding: '5px 12px',
+                borderRadius: 'var(--radius-control)',
+                fontSize: '13px',
                 fontFamily: 'var(--font-display)',
                 fontWeight: isActive ? 600 : 400,
-                color: isActive ? '#FFFFFF' : 'var(--text-secondary)',
-                background: isActive ? 'var(--primary)' : 'transparent',
-                border: 'none',
+                color: isActive ? 'var(--primary)' : 'var(--ink-secondary)',
+                background: isActive ? '#FFFFFF' : 'transparent',
+                border: isActive ? '1px solid var(--hairline)' : '1px solid transparent',
+                boxShadow: isActive ? '0 1px 2px rgba(0,0,0,0.04)' : 'none',
                 cursor: 'pointer',
-                transition: 'all 0.15s ease'
+                transition: 'all 0.12s ease'
               }}
             >
-              <Icon size={13} />
+              <Icon size={13} color={isActive ? 'var(--primary)' : 'var(--ink-muted)'} />
               {tab.label}
             </button>
           );
         })}
       </nav>
 
-      {/* Right Stats & Reseed */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-        {/* Health status badge & Paper count */}
+      {/* Right Stats & Notion CTAs */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        {/* Database Metric Strip */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '10px',
+          gap: '8px',
           background: 'var(--canvas-soft)',
-          padding: '6px 14px',
+          padding: '4px 10px',
           borderRadius: 'var(--radius-md)',
           border: '1px solid var(--hairline)',
           fontSize: '12px',
           fontFamily: 'var(--font-mono)'
         }}>
           <div style={{
-            width: '7px',
-            height: '7px',
+            width: '6px',
+            height: '6px',
             borderRadius: '50%',
             background: health?.status === 'healthy' ? '#1aae39' : '#e03e3e',
-            boxShadow: health?.status === 'healthy' ? '0 0 5px rgba(26,174,57,0.4)' : 'none'
+            boxShadow: health?.status === 'healthy' ? '0 0 4px rgba(26,174,57,0.5)' : 'none'
           }} />
-          <div style={{ display: 'flex', alignItems: 'center', gap: '9px', color: 'var(--ink-secondary)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--ink-secondary)' }}>
             <span style={{
-              background: 'rgba(0, 117, 222, 0.08)',
+              background: '#FFFFFF',
               color: 'var(--primary)',
-              padding: '2px 8px',
-              borderRadius: 'var(--radius-pill)',
-              border: '1px solid rgba(0, 117, 222, 0.25)',
+              padding: '1px 6px',
+              borderRadius: 'var(--radius-xs)',
+              border: '1px solid var(--hairline)',
               fontWeight: 600
             }}>
-              📚 {health?.papers ?? '...'} Papers
+              📄 {health?.papers ?? '...'}
             </span>
-            <span style={{ color: '#d4d0ca' }}>|</span>
+            <span style={{ color: '#d4d0ca' }}>•</span>
             <span>
               <strong style={{ color: 'var(--ink)' }}>{health?.nodes ?? '...'}</strong> nodes
             </span>
-            <span style={{ color: '#d4d0ca' }}>|</span>
+            <span style={{ color: '#d4d0ca' }}>•</span>
             <span>
               <strong style={{ color: 'var(--ink)' }}>{health?.relationships ?? '...'}</strong> edges
             </span>
-            <span style={{ color: '#d4d0ca' }}>|</span>
-            <span style={{ color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '3px', fontWeight: 600 }}>
-              <Activity size={12} /> {health?.latency_ms ? `${health.latency_ms}ms` : '...'}
+            <span style={{ color: '#d4d0ca' }}>•</span>
+            <span style={{ color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '2px', fontWeight: 600 }}>
+              <Activity size={11} /> {health?.latency_ms ? `${health.latency_ms}ms` : '...'}
             </span>
           </div>
         </div>
@@ -164,11 +187,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           onClick={onReseed}
           disabled={isReseeding}
           title="Reload curated landmark AI/ML seed dataset"
-          className="aura-btn-secondary"
-          style={{ fontSize: '12px', padding: '6px 14px', borderRadius: 'var(--radius-md)' }}
+          className="aura-btn-utility"
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '12px' }}
         >
-          <RotateCcw size={13} className={isReseeding ? 'animate-spin-slow' : ''} />
-          {isReseeding ? 'Seeding...' : 'Reseed Data'}
+          <RotateCcw size={12} className={isReseeding ? 'animate-spin-slow' : ''} />
+          {isReseeding ? 'Seeding...' : 'Reseed'}
         </button>
       </div>
     </header>

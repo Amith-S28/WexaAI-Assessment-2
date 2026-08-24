@@ -429,7 +429,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
 
   return (
     <div style={{ position: 'relative', width: '100%', height: 'calc(100vh - 65px)', overflow: 'hidden' }}>
-      {/* Top Control Bar */}
+      {/* Top Floating Control Bar (Notion Toolbar) */}
       <div style={{
         position: 'absolute',
         top: '18px',
@@ -439,46 +439,41 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
         alignItems: 'center',
         gap: '12px',
         background: '#FFFFFF',
-        padding: '8px 16px',
-        borderRadius: 'var(--radius-card)',
-        border: '1px solid #111827',
+        padding: '7px 14px',
+        borderRadius: 'var(--radius-md)',
+        border: '1px solid var(--hairline)',
         boxShadow: 'var(--shadow-card)'
       }}>
         {/* Search Bar */}
         <form onSubmit={handleSearchSubmit} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-            <Search size={14} style={{ position: 'absolute', left: '10px', color: 'var(--text-muted)' }} />
+            <Search size={13} style={{ position: 'absolute', left: '9px', color: 'var(--ink-muted)' }} />
             <input
               type="text"
-              placeholder="Search papers..."
+              placeholder="Search graph..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              className="notion-input"
               style={{
-                background: 'var(--surface)',
-                border: '1px solid var(--border)',
-                borderRadius: 'var(--radius-control)',
-                padding: '6px 12px 6px 30px',
-                color: 'var(--text-primary)',
-                fontFamily: 'var(--font-body)',
-                fontSize: '13px',
-                width: '180px',
-                outline: 'none'
+                paddingLeft: '28px',
+                width: '170px',
+                fontSize: '12px'
               }}
             />
           </div>
           <button
             type="submit"
             className="aura-btn-primary"
-            style={{ padding: '6px 14px', fontSize: '12px' }}
+            style={{ padding: '5px 12px', fontSize: '12px' }}
           >
             Filter
           </button>
         </form>
 
-        <div style={{ width: '1px', height: '20px', background: 'var(--border)' }} />
+        <div style={{ width: '1px', height: '18px', background: 'var(--hairline)' }} />
 
         {/* Edge / Node Filter Toggles */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '12px', color: 'var(--text-secondary)', fontFamily: 'var(--font-display)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '12px', color: 'var(--ink-secondary)', fontFamily: 'var(--font-display)' }}>
           <label style={{ display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer' }}>
             <input
               type="checkbox"
@@ -486,7 +481,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
               onChange={(e) => setShowConcepts(e.target.checked)}
               style={{ accentColor: 'var(--primary)' }}
             />
-            <span style={{ color: 'var(--text-primary)' }}>Domains</span>
+            <span style={{ color: 'var(--ink)' }}>Domains</span>
           </label>
 
           <label style={{ display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer' }} title="Toggle domain connecting wires">
@@ -510,11 +505,11 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
           </label>
         </div>
 
-        <div style={{ width: '1px', height: '20px', background: 'var(--border)' }} />
+        <div style={{ width: '1px', height: '18px', background: 'var(--hairline)' }} />
 
         {/* Min Citations Slider */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: 'var(--text-secondary)' }}>
-          <Filter size={13} color="var(--primary)" />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: 'var(--ink-secondary)' }}>
+          <Filter size={12} color="var(--primary)" />
           <input
             type="range"
             min="0"
@@ -526,7 +521,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
               setMinCitations(val);
               onRefresh(searchTerm, val);
             }}
-            style={{ width: '65px', accentColor: 'var(--primary)', cursor: 'pointer' }}
+            style={{ width: '60px', accentColor: 'var(--primary)', cursor: 'pointer' }}
           />
           <span className="aura-tag-mono" style={{ fontSize: '10px' }}>
             {minCitations > 0 ? `${(minCitations / 1000).toFixed(0)}k+` : 'All'}
@@ -540,14 +535,14 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
           style={{
             background: 'transparent',
             border: 'none',
-            color: 'var(--text-secondary)',
+            color: 'var(--ink-muted)',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            padding: '4px'
+            padding: '3px'
           }}
         >
-          <RefreshCw size={14} className={isLoading ? 'animate-spin-slow' : ''} />
+          <RefreshCw size={13} className={isLoading ? 'animate-spin-slow' : ''} />
         </button>
       </div>
 
@@ -555,36 +550,36 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
       {selectedNodeId && (
         <div style={{
           position: 'absolute',
-          top: '74px',
+          top: '68px',
           left: '24px',
           zIndex: 10,
           background: '#FFFFFF',
-          border: '1px solid #111827',
+          border: '1px solid var(--hairline)',
           borderRadius: 'var(--radius-pill)',
-          padding: '5px 12px',
+          padding: '4px 10px',
           display: 'flex',
           alignItems: 'center',
           gap: '8px',
           fontSize: '11px',
           color: 'var(--primary)',
           fontFamily: 'var(--font-mono)',
-          boxShadow: 'var(--shadow-control)'
+          fontWeight: 600,
+          boxShadow: 'var(--shadow-card)'
         }}>
-          <span>1-Hop Isolated</span>
+          <span>Focused: 1-hop connected</span>
           <button
             onClick={() => setSelectedNodeId(null)}
             style={{
               background: 'transparent',
               border: 'none',
-              color: 'var(--text-secondary)',
+              color: 'var(--ink-muted)',
               cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              padding: '2px'
+              fontSize: '11px',
+              fontWeight: 500,
+              padding: 0
             }}
-            title="Reset focus"
           >
-            <XCircle size={13} />
+            Clear ✕
           </button>
         </div>
       )}
