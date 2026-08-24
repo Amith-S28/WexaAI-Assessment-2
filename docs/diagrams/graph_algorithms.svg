@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" width="100%" height="100%" role="img" aria-labelledby="algo-title algo-desc">
+  <title id="algo-title">PaperFlow Graph Intelligence &amp; Research Gap Discovery Engine</title>
+  <desc id="algo-desc">Visual explanation of the 3 graph analytical algorithms: Multi-Hop Citation Lineage, Triadic Concept Disconnect Gaps, and Interdisciplinary Bridge Discovery in CognoDB Cloud.</desc>
+
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap');
+      .txt-title { font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 700; fill: #111827; }
+      .txt-header { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; fill: #111827; }
+      .txt-body { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; fill: #4B5563; }
+      .txt-mono { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; fill: #E65C00; letter-spacing: 0.06em; }
+      .txt-mono-dark { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; fill: #111827; }
+      .txt-label { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 700; fill: #E65C00; letter-spacing: 0.05em; }
+      .txt-alert { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; fill: #DC2626; }
+    </style>
+    
+    <marker id="arrow-rel" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#E65C00" />
+    </marker>
+    <marker id="arrow-dark" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#111827" />
+    </marker>
+    <marker id="arrow-alert" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#DC2626" />
+    </marker>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="100%" height="100%" fill="#FDFBF7" />
+
+  <!-- Title Header -->
+  <text x="40" y="44" class="txt-title">Graph Analytics &amp; Research Gap Discovery Algorithms</text>
+  <text x="40" y="66" class="txt-body">High-Performance openCypher Pattern Matching Beyond Relational SQL Capabilities</text>
+
+  <!-- ================= 3 ALGORITHM COLUMNS ================= -->
+
+  <!-- COLUMN 1: Multi-Hop Lineage -->
+  <g transform="translate(40, 96)">
+    <rect width="270" height="340" rx="12" fill="#FFFFFF" stroke="#111827" stroke-width="1.5" />
+    <rect width="270" height="36" rx="12" fill="#F7F4EB" stroke="#111827" stroke-width="1" />
+    <rect y="24" width="270" height="12" fill="#F7F4EB" />
+    <line x1="0" y1="36" x2="270" y2="36" stroke="#111827" stroke-width="1" />
+    <text x="14" y="23" class="txt-mono">ALGO 01: LINEAGE TRACING</text>
+
+    <text x="14" y="60" class="txt-header">Multi-Hop Citation Traversal</text>
+    <text x="14" y="78" class="txt-body">Directional graph traversal 1..4 hops</text>
+
+    <!-- Node 1 (Origin) -->
+    <rect x="14" y="98" width="242" height="42" rx="6" fill="#FFF7ED" stroke="#E65C00" stroke-width="1.5" />
+    <text x="24" y="116" class="txt-header" font-size="11">DeepSeek-R1 (2025)</text>
+    <text x="24" y="130" class="txt-mono" font-size="8">ORIGIN BREAKTHROUGH NODE</text>
+
+    <!-- Down arrow -->
+    <line x1="135" y1="140" x2="135" y2="162" stroke="#E65C00" stroke-width="1.5" marker-end="url(#arrow-rel)" />
+    <text x="145" y="154" class="txt-mono" font-size="8">CITES*1</text>
+
+    <!-- Node 2 (Intermediate) -->
+    <rect x="14" y="166" width="242" height="42" rx="6" fill="#FFFFFF" stroke="#111827" stroke-width="1" />
+    <text x="24" y="184" class="txt-header" font-size="11">InstructGPT / RLHF (2022)</text>
+    <text x="24" y="198" class="txt-body" font-size="9">1st-Hop Predecessor</text>
+
+    <!-- Down arrow -->
+    <line x1="135" y1="208" x2="135" y2="230" stroke="#E65C00" stroke-width="1.5" marker-end="url(#arrow-rel)" />
+    <text x="145" y="222" class="txt-mono" font-size="8">CITES*2</text>
+
+    <!-- Node 3 (Foundational Root) -->
+    <rect x="14" y="234" width="242" height="42" rx="6" fill="#F7F4EB" stroke="#111827" stroke-width="1" />
+    <text x="24" y="252" class="txt-header" font-size="11">Attention Is All You Need (2017)</text>
+    <text x="24" y="266" class="txt-mono-dark" font-size="8">FOUNDATIONAL ROOT (115k cites)</text>
+
+    <!-- Code Snippet Pill -->
+    <rect x="14" y="292" width="242" height="34" rx="6" fill="#FDFBF7" stroke="#E5E7EB" stroke-width="1" />
+    <text x="24" y="307" class="txt-mono-dark" font-size="8">MATCH (p)-[:CITES*1..4]-&gt;(ancestor)</text>
+    <text x="24" y="319" class="txt-body" font-size="8">Pointer hopping: &lt; 8ms in CognoDB</text>
+  </g>
+
+
+  <!-- COLUMN 2: Triadic Concept Disconnect -->
+  <g transform="translate(345, 96)">
+    <rect width="270" height="340" rx="12" fill="#FFFFFF" stroke="#111827" stroke-width="1.5" />
+    <rect width="270" height="36" rx="12" fill="#F7F4EB" stroke="#111827" stroke-width="1" />
+    <rect y="24" width="270" height="12" fill="#F7F4EB" />
+    <line x1="0" y1="36" x2="270" y2="36" stroke="#111827" stroke-width="1" />
+    <text x="14" y="23" class="txt-mono">ALGO 02: TRIADIC GAPS</text>
+
+    <text x="14" y="60" class="txt-header">Triadic Concept Closures</text>
+    <text x="14" y="78" class="txt-body">Finds unstudied interdisciplinary voids</text>
+
+    <!-- Top: Concept A & Concept B -->
+    <rect x="14" y="98" width="112" height="36" rx="6" fill="#FFF7ED" stroke="#E65C00" stroke-width="1" />
+    <text x="70" y="120" class="txt-header" font-size="9" text-anchor="middle">Graph Neural Nets</text>
+
+    <rect x="144" y="98" width="112" height="36" rx="6" fill="#FFF7ED" stroke="#E65C00" stroke-width="1" />
+    <text x="200" y="120" class="txt-header" font-size="9" text-anchor="middle">Structural Biology</text>
+
+    <!-- Cross Disconnect (RED DASHED) -->
+    <path d="M 126 116 L 144 116" stroke="#DC2626" stroke-width="2" stroke-dasharray="3,2" />
+    <text x="135" y="90" class="txt-alert" font-size="8" text-anchor="middle">0 Joint Papers</text>
+
+    <!-- Arrows down to shared foundation -->
+    <path d="M 70 134 L 70 170 Q 70 178 78 178 L 110 178" fill="none" stroke="#111827" stroke-width="1.2" marker-end="url(#arrow-dark)" />
+    <path d="M 200 134 L 200 170 Q 200 178 192 178 L 160 178" fill="none" stroke="#111827" stroke-width="1.2" marker-end="url(#arrow-dark)" />
+
+    <!-- Shared Foundation Node -->
+    <rect x="24" y="184" width="222" height="50" rx="8" fill="#F7F4EB" stroke="#111827" stroke-width="1.5" />
+    <text x="34" y="204" class="txt-header" font-size="10">Shared Foundational Root</text>
+    <text x="34" y="222" class="txt-mono" font-size="8">ResNet / GCN (Jointly Cited)</text>
+
+    <rect x="14" y="250" width="242" height="76" rx="6" fill="#FDFBF7" stroke="#E5E7EB" stroke-width="1" />
+    <text x="24" y="268" class="txt-alert" font-size="9">⚡ Untapped Research Void</text>
+    <text x="24" y="284" class="txt-body" font-size="9">Both disciplines cite common literature,</text>
+    <text x="24" y="298" class="txt-body" font-size="9">yet authors have never collaborated.</text>
+    <text x="24" y="314" class="txt-mono" font-size="8">OPPORTUNITY SCORE: 92%</text>
+  </g>
+
+
+  <!-- COLUMN 3: Interdisciplinary Bridges -->
+  <g transform="translate(650, 96)">
+    <rect width="270" height="340" rx="12" fill="#FFFFFF" stroke="#111827" stroke-width="1.5" />
+    <rect width="270" height="36" rx="12" fill="#F7F4EB" stroke="#111827" stroke-width="1" />
+    <rect y="24" width="270" height="12" fill="#F7F4EB" />
+    <line x1="0" y1="36" x2="270" y2="36" stroke="#111827" stroke-width="1" />
+    <text x="14" y="23" class="txt-mono">ALGO 03: BRIDGE DISCOVERY</text>
+
+    <text x="14" y="60" class="txt-header">Shortest-Path Betweenness</text>
+    <text x="14" y="78" class="txt-body">Identifies topological connector papers</text>
+
+    <!-- Domain A -->
+    <rect x="14" y="98" width="242" height="36" rx="6" fill="#F7F4EB" stroke="#111827" stroke-width="1" />
+    <text x="24" y="120" class="txt-header" font-size="10">NLP (Domain A)</text>
+
+    <!-- Arrow down -->
+    <line x1="135" y1="134" x2="135" y2="158" stroke="#E65C00" stroke-width="1.5" marker-end="url(#arrow-rel)" />
+
+    <!-- Bridge Paper (HIGHLIGHTED) -->
+    <rect x="14" y="162" width="242" height="60" rx="8" fill="#FFF7ED" stroke="#E65C00" stroke-width="2" />
+    <rect x="24" y="170" width="80" height="12" rx="2" fill="#E65C00" />
+    <text x="64" y="179" class="txt-mono" font-size="7" fill="#FFFFFF" text-anchor="middle">TOP CONNECTOR</text>
+    <text x="24" y="196" class="txt-header" font-size="11">CLIP (Radford et al. 2021)</text>
+    <text x="24" y="212" class="txt-body" font-size="9">Betweenness: 28 shortest citation paths</text>
+
+    <!-- Arrow down -->
+    <line x1="135" y1="222" x2="135" y2="246" stroke="#E65C00" stroke-width="1.5" marker-end="url(#arrow-rel)" />
+
+    <!-- Domain B -->
+    <rect x="14" y="250" width="242" height="36" rx="6" fill="#F7F4EB" stroke="#111827" stroke-width="1" />
+    <text x="24" y="272" class="txt-header" font-size="10">Computer Vision (Domain B)</text>
+
+    <rect x="14" y="296" width="242" height="30" rx="6" fill="#FDFBF7" stroke="#E5E7EB" stroke-width="1" />
+    <text x="24" y="314" class="txt-mono-dark" font-size="8">MATCH shortestPath((pA)-[:CITES*1..4]-(pB))</text>
+  </g>
+
+</svg>

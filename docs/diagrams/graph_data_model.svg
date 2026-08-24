@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" width="100%" height="100%" role="img" aria-labelledby="data-model-title data-model-desc">
+  <title id="data-model-title">PaperFlow Property Graph Data Model</title>
+  <desc id="data-model-desc">Entity-relationship diagram showing Paper, Author, and Concept nodes with typed relationships and openCypher property constraints in CognoDB Cloud.</desc>
+
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap');
+      .txt-title { font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 700; fill: #111827; }
+      .txt-header { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; fill: #111827; }
+      .txt-prop-name { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; fill: #111827; }
+      .txt-prop-type { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; fill: #6B7280; }
+      .txt-body { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; fill: #4B5563; }
+      .txt-mono { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; fill: #E65C00; letter-spacing: 0.06em; }
+      .txt-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; fill: #E65C00; letter-spacing: 0.05em; }
+    </style>
+    
+    <marker id="arrow-rel" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#E65C00" />
+    </marker>
+    <marker id="arrow-dark" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#111827" />
+    </marker>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="100%" height="100%" fill="#FDFBF7" />
+
+  <!-- Title Header -->
+  <text x="40" y="44" class="txt-title">CognoDB Property Graph Schema &amp; Topology</text>
+  <text x="40" y="66" class="txt-body">Labeled Nodes, Properties, and Typed Relationships with Unique Constraints &amp; B-Tree Indexes</text>
+
+  <!-- ================= NODES ================= -->
+
+  <!-- NODE 1: :Paper (Center Left) -->
+  <g transform="translate(60, 110)">
+    <!-- Node Box -->
+    <rect width="280" height="300" rx="12" fill="#FFFFFF" stroke="#111827" stroke-width="1.5" />
+    <!-- Header -->
+    <rect width="280" height="42" rx="12" fill="#FFF7ED" stroke="#E65C00" stroke-width="1.5" />
+    <rect y="30" width="280" height="12" fill="#FFF7ED" />
+    <line x1="0" y1="42" x2="280" y2="42" stroke="#E65C00" stroke-width="1.5" />
+    <text x="16" y="26" class="txt-mono" font-size="11">NODE LABEL: :Paper</text>
+
+    <!-- Properties -->
+    <text x="16" y="68" class="txt-prop-name">id: <tspan class="txt-prop-type">String [PK, UNIQUE]</tspan></text>
+    <text x="16" y="92" class="txt-prop-name">title: <tspan class="txt-prop-type">String [INDEXED]</tspan></text>
+    <text x="16" y="116" class="txt-prop-name">year: <tspan class="txt-prop-type">Integer [INDEXED]</tspan></text>
+    <text x="16" y="140" class="txt-prop-name">venue: <tspan class="txt-prop-type">String</tspan></text>
+    <text x="16" y="164" class="txt-prop-name">citation_count: <tspan class="txt-prop-type">Integer</tspan></text>
+    <text x="16" y="188" class="txt-prop-name">abstract: <tspan class="txt-prop-type">String (&lt; 2000 chars)</tspan></text>
+    <text x="16" y="212" class="txt-prop-name">tldr: <tspan class="txt-prop-type">String (&lt; 500 chars)</tspan></text>
+    <text x="16" y="236" class="txt-prop-name">url: <tspan class="txt-prop-type">String</tspan></text>
+
+    <!-- Footer pill -->
+    <rect x="16" y="260" width="248" height="26" rx="6" fill="#F7F4EB" stroke="#E5E7EB" stroke-width="1" />
+    <text x="140" y="277" class="txt-mono" text-anchor="middle" font-size="9">144+ INSTANCES SEEDED</text>
+  </g>
+
+
+  <!-- NODE 2: :Author (Top Right) -->
+  <g transform="translate(620, 90)">
+    <!-- Node Box -->
+    <rect width="280" height="170" rx="12" fill="#FFFFFF" stroke="#111827" stroke-width="1.5" />
+    <!-- Header -->
+    <rect width="280" height="38" rx="12" fill="#F7F4EB" stroke="#111827" stroke-width="1" />
+    <rect y="26" width="280" height="12" fill="#F7F4EB" />
+    <line x1="0" y1="38" x2="280" y2="38" stroke="#111827" stroke-width="1" />
+    <text x="16" y="24" class="txt-mono-dark" font-size="11">NODE LABEL: :Author</text>
+
+    <!-- Properties -->
+    <text x="16" y="62" class="txt-prop-name">id: <tspan class="txt-prop-type">String [PK, UNIQUE]</tspan></text>
+    <text x="16" y="86" class="txt-prop-name">name: <tspan class="txt-prop-type">String [INDEXED]</tspan></text>
+    <text x="16" y="110" class="txt-prop-name">paper_count: <tspan class="txt-prop-type">Integer</tspan></text>
+    <text x="16" y="134" class="txt-prop-name">citation_count: <tspan class="txt-prop-type">Integer</tspan></text>
+    <text x="16" y="156" class="txt-prop-name">url: <tspan class="txt-prop-type">String</tspan></text>
+  </g>
+
+
+  <!-- NODE 3: :Concept (Bottom Right) -->
+  <g transform="translate(620, 290)">
+    <!-- Node Box -->
+    <rect width="280" height="140" rx="12" fill="#FFFFFF" stroke="#111827" stroke-width="1.5" />
+    <!-- Header -->
+    <rect width="280" height="38" rx="12" fill="#F7F4EB" stroke="#111827" stroke-width="1" />
+    <rect y="26" width="280" height="12" fill="#F7F4EB" />
+    <line x1="0" y1="38" x2="280" y2="38" stroke="#111827" stroke-width="1" />
+    <text x="16" y="24" class="txt-mono-dark" font-size="11">NODE LABEL: :Concept</text>
+
+    <!-- Properties -->
+    <text x="16" y="64" class="txt-prop-name">id: <tspan class="txt-prop-type">String [PK, UNIQUE]</tspan></text>
+    <text x="16" y="90" class="txt-prop-name">name: <tspan class="txt-prop-type">String [INDEXED]</tspan></text>
+    <text x="16" y="116" class="txt-prop-name">field: <tspan class="txt-prop-type">String</tspan></text>
+  </g>
+
+
+  <!-- ================= RELATIONSHIPS ================= -->
+
+  <!-- Rel 1: [:AUTHORED_BY] (Paper -> Author) -->
+  <path d="M 340 180 L 480 180 Q 488 180 488 172 L 488 172 Q 488 164 496 164 L 620 164" fill="none" stroke="#111827" stroke-width="1.5" marker-end="url(#arrow-dark)" />
+  <rect x="420" y="152" width="120" height="16" rx="4" fill="#FDFBF7" stroke="#E5E7EB" stroke-width="1" />
+  <text x="480" y="164" class="txt-mono-dark" font-size="9" text-anchor="middle">[:AUTHORED_BY]</text>
+
+  <!-- Rel 2: [:COVERS_CONCEPT] (Paper -> Concept) -->
+  <path d="M 340 340 L 480 340 Q 488 340 488 348 L 488 348 Q 488 356 496 356 L 620 356" fill="none" stroke="#111827" stroke-width="1.5" marker-end="url(#arrow-dark)" />
+  <rect x="410" y="344" width="140" height="16" rx="4" fill="#FDFBF7" stroke="#E5E7EB" stroke-width="1" />
+  <text x="480" y="356" class="txt-mono-dark" font-size="9" text-anchor="middle">[:COVERS_CONCEPT]</text>
+
+  <!-- Rel 3: [:CITES] (Recursive Self-Loop on Paper) -->
+  <path d="M 120 410 L 120 448 Q 120 456 128 456 L 272 456 Q 280 456 280 448 L 280 410" fill="none" stroke="#E65C00" stroke-width="2" marker-end="url(#arrow-rel)" />
+  <rect x="135" y="446" width="130" height="18" rx="4" fill="#FFF7ED" stroke="#E65C00" stroke-width="1" />
+  <text x="200" y="458" class="txt-label" text-anchor="middle">[:CITES {isInfluential}]</text>
+
+  <!-- Rel 4: [:CO_AUTHORED_WITH] (Loop on Author) -->
+  <path d="M 900 130 L 932 130 Q 940 130 940 138 L 940 162 Q 940 170 932 170 L 900 170" fill="none" stroke="#9CA3AF" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow-dark)" />
+  <rect x="880" y="174" width="70" height="14" rx="3" fill="#FDFBF7" />
+  <text x="915" y="184" class="txt-body" font-size="8" text-anchor="middle">co-authorship</text>
+
+</svg>

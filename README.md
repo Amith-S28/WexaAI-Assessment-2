@@ -4,6 +4,12 @@ An interactive, high-performance graph database application built on **CognoDB C
 
 ---
 
+## 🏛️ System Architecture
+
+![PaperFlow End-to-End System Architecture](docs/diagrams/system_architecture.svg)
+
+---
+
 ## 1. "Why a Graph Database?"
 
 Academic literature is inherently a connected directed acyclic network (DAG) of citations, shared foundational methodologies, and author collaborations—not a flat tabular spreadsheet. Answering real-world bibliometric and research intelligence questions in a relational database introduces severe architectural friction:
@@ -19,27 +25,13 @@ Academic literature is inherently a connected directed acyclic network (DAG) of 
 
 ## 2. Graph Data Model
 
-```
-               [:AUTHORED_BY]
-      (Paper) ----------------> (Author)
-        |  |                      ^
-        |  |                      | [:CO_AUTHORED_WITH]
-        |  |                      v
-        |  +-------------------> (Author)
-        |
-        | [:COVERS_CONCEPT]
-        +----------------------> (Concept)
-        |
-        | [:CITES {isInfluential, intent}]
-        v
-      (Paper)
-```
+![CognoDB Property Graph Schema & Topology](docs/diagrams/graph_data_model.svg)
 
 ### Node Labels & Properties
 - **`:Paper`**
   - `id` *(String, Primary Key)*: Semantic Scholar Paper ID (40-char SHA) or Corpus ID.
-  - `title` *(String)*: Paper publication title.
-  - `year` *(Integer)*: Year of publication.
+  - `title` *(String, Indexed)*: Paper publication title.
+  - `year` *(Integer, Indexed)*: Year of publication.
   - `venue` *(String)*: Conference / Journal / ArXiv venue.
   - `citation_count` *(Integer)*: Total citations count.
   - `abstract` *(String)*: Full publication abstract.
@@ -47,16 +39,16 @@ Academic literature is inherently a connected directed acyclic network (DAG) of 
   - `url` *(String)*: Direct Semantic Scholar / Open Access link.
 - **`:Author`**
   - `id` *(String, Primary Key)*: Semantic Scholar Author ID.
-  - `name` *(String)*: Author's full display name.
+  - `name` *(String, Indexed)*: Author's full display name.
   - `url` *(String)*: Author's profile URL.
   - `paper_count` *(Integer)*: Publication count.
   - `citation_count` *(Integer)*: Total citation count.
 - **`:Concept`**
   - `id` *(String, Primary Key)*: Normalized concept identifier (e.g., `natural_language_processing`).
-  - `name` *(String)*: Display name.
+  - `name` *(String, Indexed)*: Display name.
   - `field` *(String)*: Broad field category (e.g., `Computer Science`, `Structural Biology`).
 
-### Relationships
+### Typed Relationships
 - `(:Paper)-[:CITES {isInfluential: Boolean, intent: String}]->(:Paper)`: Directed citation reference edge.
 - `(:Paper)-[:AUTHORED_BY]->(:Author)`: Attribution link.
 - `(:Paper)-[:COVERS_CONCEPT]->(:Concept)`: Semantic topic categorization.
@@ -64,7 +56,9 @@ Academic literature is inherently a connected directed acyclic network (DAG) of 
 
 ---
 
-## 3. Core Cypher Queries Explained
+## 3. Core Cypher Queries & Algorithms
+
+![Graph Analytics & Gap Discovery Algorithms](docs/diagrams/graph_algorithms.svg)
 
 All queries use **100% parameterized openCypher statements** via the official Neo4j Python Bolt driver (zero string concatenation):
 
@@ -262,6 +256,11 @@ Application_Assessment/
 │   │       └── IngestConsole.tsx # On-demand S2 search & batch upsert UI
 │   ├── package.json
 │   └── vite.config.ts
+├── docs/
+│   └── diagrams/
+│       ├── system_architecture.svg   # End-to-end data pipeline diagram
+│       ├── graph_data_model.svg      # Property graph schema diagram
+│       └── graph_algorithms.svg      # Query & gap discovery algorithms diagram
 ├── scripts/
 │   ├── seed_data.py              # Curated AI/ML landmark dataset loader (144+ papers)
 │   ├── test_connection.py        # Standalone CognoDB connectivity test

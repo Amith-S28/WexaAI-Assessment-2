@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" width="100%" height="100%" role="img" aria-labelledby="sys-arch-title sys-arch-desc">
+  <title id="sys-arch-title">PaperFlow End-to-End System &amp; Data Pipeline Architecture</title>
+  <desc id="sys-arch-desc">Architecture diagram showing Semantic Scholar API feeding the FastAPI backend service, storing data in CognoDB Cloud via Bolt protocol, and rendering through the PaperFlow React frontend.</desc>
+
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap');
+      .txt-title { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; fill: #111827; }
+      .txt-header { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; fill: #111827; }
+      .txt-body { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; fill: #4B5563; }
+      .txt-mono { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; fill: #E65C00; }
+      .txt-mono-dark { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; fill: #111827; }
+      .txt-label { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 600; fill: #E65C00; letter-spacing: 0.06em; }
+    </style>
+    
+    <marker id="arrow-terracotta" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#E65C00" />
+    </marker>
+    <marker id="arrow-dark" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#111827" />
+    </marker>
+    <marker id="arrow-muted" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#9CA3AF" />
+    </marker>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="100%" height="100%" fill="#FDFBF7" />
+
+  <!-- Diagram Title Header -->
+  <text x="40" y="44" class="txt-title" font-size="20">PaperFlow System &amp; Data Pipeline Architecture</text>
+  <text x="40" y="66" class="txt-body" font-size="12">End-to-End Micro-Instance Ingestion, openCypher Storage, and Interactive Analytics Flow</text>
+
+  <!-- ================= ZONES ================= -->
+  
+  <!-- Zone 1: External Source -->
+  <rect x="40" y="96" width="180" height="320" rx="12" fill="#F7F4EB" stroke="#E5E7EB" stroke-width="1.5" />
+  <text x="56" y="124" class="txt-mono" letter-spacing="0.08em">01 / EXTERNAL INGESTION</text>
+  <text x="56" y="146" class="txt-header">Semantic Scholar</text>
+  <text x="56" y="164" class="txt-body">Open Academic Graph API</text>
+
+  <!-- S2 Item 1 -->
+  <rect x="56" y="184" width="148" height="52" rx="8" fill="#FFFFFF" stroke="#111827" stroke-width="1" />
+  <text x="68" y="204" class="txt-header" font-size="11">Paper Metadata</text>
+  <text x="68" y="222" class="txt-body" font-size="10">Title, Year, Abstract, TLDR</text>
+
+  <!-- S2 Item 2 -->
+  <rect x="56" y="248" width="148" height="52" rx="8" fill="#FFFFFF" stroke="#111827" stroke-width="1" />
+  <text x="68" y="268" class="txt-header" font-size="11">Citation References</text>
+  <text x="68" y="286" class="txt-body" font-size="10">1-Hop Forward &amp; Backward</text>
+
+  <!-- S2 Item 3 -->
+  <rect x="56" y="312" width="148" height="52" rx="8" fill="#FFFFFF" stroke="#111827" stroke-width="1" />
+  <text x="68" y="332" class="txt-header" font-size="11">Authors &amp; Fields</text>
+  <text x="68" y="350" class="txt-body" font-size="10">S2 Author IDs &amp; Domains</text>
+
+
+  <!-- Zone 2: Backend Application Layer -->
+  <rect x="260" y="96" width="280" height="320" rx="12" fill="#F7F4EB" stroke="#E5E7EB" stroke-width="1.5" />
+  <text x="276" y="124" class="txt-mono" letter-spacing="0.08em">02 / BACKEND SERVICES</text>
+  <text x="276" y="146" class="txt-header">FastAPI Application Layer</text>
+  <text x="276" y="164" class="txt-body">Micro-Instance Memory Footprint (&lt; 85 MB)</text>
+
+  <!-- Backend Component 1 -->
+  <rect x="276" y="184" width="248" height="60" rx="8" fill="#FFFFFF" stroke="#111827" stroke-width="1" />
+  <rect x="286" y="194" width="48" height="14" rx="3" fill="#FDFBF7" stroke="#E65C00" stroke-width="0.8" />
+  <text x="310" y="204" class="txt-mono" text-anchor="middle" font-size="8">SERVICE</text>
+  <text x="342" y="206" class="txt-header" font-size="11">Ingestion Streamer</text>
+  <text x="286" y="230" class="txt-body" font-size="10">Async HTTP, 429 backoff &amp; UNWIND batching</text>
+
+  <!-- Backend Component 2 -->
+  <rect x="276" y="256" width="248" height="60" rx="8" fill="#FFFFFF" stroke="#E65C00" stroke-width="1.5" />
+  <rect x="286" y="266" width="48" height="14" rx="3" fill="#FFF7ED" stroke="#E65C00" stroke-width="0.8" />
+  <text x="310" y="276" class="txt-mono" text-anchor="middle" font-size="8">CORE</text>
+  <text x="342" y="278" class="txt-header" font-size="11">openCypher Query Engine</text>
+  <text x="286" y="302" class="txt-body" font-size="10">Parameterized Multi-Hop &amp; Triadic Closures</text>
+
+  <!-- Backend Component 3 -->
+  <rect x="276" y="328" width="248" height="68" rx="8" fill="#FFFFFF" stroke="#111827" stroke-width="1" />
+  <rect x="286" y="338" width="40" height="14" rx="3" fill="#FDFBF7" stroke="#111827" stroke-width="0.8" />
+  <text x="306" y="348" class="txt-mono-dark" text-anchor="middle" font-size="8">REST</text>
+  <text x="334" y="350" class="txt-header" font-size="11">API Routing Endpoints</text>
+  <text x="286" y="372" class="txt-body" font-size="9">/api/graph • /api/lineage • /api/gaps • /api/health</text>
+
+
+  <!-- Zone 3: Database Layer -->
+  <rect x="580" y="96" width="160" height="320" rx="12" fill="#FFF7ED" stroke="#E65C00" stroke-width="1.5" />
+  <text x="596" y="124" class="txt-mono" letter-spacing="0.08em">03 / DATABASE</text>
+  <text x="596" y="146" class="txt-header">CognoDB Cloud</text>
+  <text x="596" y="164" class="txt-body">Managed Graph Layer</text>
+
+  <!-- CognoDB Node Item 1 -->
+  <rect x="596" y="184" width="128" height="52" rx="8" fill="#FFFFFF" stroke="#111827" stroke-width="1" />
+  <text x="608" y="204" class="txt-header" font-size="11">(:Paper) Nodes</text>
+  <text x="608" y="222" class="txt-mono" font-size="9">144+ Labeled Papers</text>
+
+  <!-- CognoDB Node Item 2 -->
+  <rect x="596" y="248" width="128" height="52" rx="8" fill="#FFFFFF" stroke="#111827" stroke-width="1" />
+  <text x="608" y="268" class="txt-header" font-size="11">[:CITES] Edges</text>
+  <text x="608" y="286" class="txt-mono" font-size="9">170+ Citations</text>
+
+  <!-- CognoDB Node Item 3 -->
+  <rect x="596" y="312" width="128" height="52" rx="8" fill="#FFFFFF" stroke="#111827" stroke-width="1" />
+  <text x="608" y="332" class="txt-header" font-size="11">(:Concept) Nodes</text>
+  <text x="608" y="350" class="txt-mono" font-size="9">29 Domain Fields</text>
+
+
+  <!-- Zone 4: Frontend UI Layer -->
+  <rect x="780" y="96" width="140" height="320" rx="12" fill="#F7F4EB" stroke="#E5E7EB" stroke-width="1.5" />
+  <text x="794" y="124" class="txt-mono" letter-spacing="0.08em">04 / UI</text>
+  <text x="794" y="146" class="txt-header">PaperFlow SPA</text>
+  <text x="794" y="164" class="txt-body">React 19 + Vite</text>
+
+  <!-- Frontend Module 1 -->
+  <rect x="794" y="184" width="112" height="42" rx="6" fill="#FFFFFF" stroke="#111827" stroke-width="1" />
+  <text x="804" y="204" class="txt-header" font-size="10">Graph Explorer</text>
+  <text x="804" y="218" class="txt-body" font-size="9">1-Hop Isolation</text>
+
+  <!-- Frontend Module 2 -->
+  <rect x="794" y="236" width="112" height="42" rx="6" fill="#FFFFFF" stroke="#111827" stroke-width="1" />
+  <text x="804" y="256" class="txt-header" font-size="10">Lineage Tracing</text>
+  <text x="804" y="270" class="txt-body" font-size="9">Multi-Hop Trees</text>
+
+  <!-- Frontend Module 3 -->
+  <rect x="794" y="288" width="112" height="42" rx="6" fill="#FFFFFF" stroke="#111827" stroke-width="1" />
+  <text x="804" y="308" class="txt-header" font-size="10">Gap Finder</text>
+  <text x="804" y="322" class="txt-body" font-size="9">Triadic Closures</text>
+
+  <!-- Frontend Module 4 -->
+  <rect x="794" y="340" width="112" height="42" rx="6" fill="#FFFFFF" stroke="#111827" stroke-width="1" />
+  <text x="804" y="360" class="txt-header" font-size="10">Live Ingest</text>
+  <text x="804" y="374" class="txt-body" font-size="9">S2 Streamer UI</text>
+
+
+  <!-- ================= CONNECTORS (Orthogonal r=8 with masked labels) ================= -->
+
+  <!-- Line 1: S2 to Ingestion Streamer -->
+  <path d="M 204 210 L 240 210 Q 248 210 248 214 L 248 214 Q 248 214 256 214 L 276 214" fill="none" stroke="#E65C00" stroke-width="1.5" marker-end="url(#arrow-terracotta)" />
+  <rect x="214" y="198" width="50" height="12" rx="2" fill="#FDFBF7" />
+  <text x="239" y="207" class="txt-label" text-anchor="middle">STREAM</text>
+
+  <!-- Line 2: Backend Query Engine to CognoDB -->
+  <path d="M 524 286 L 552 286 Q 560 286 560 286 L 560 286 Q 560 286 568 286 L 596 286" fill="none" stroke="#E65C00" stroke-width="2" marker-end="url(#arrow-terracotta)" />
+  <rect x="532" y="272" width="56" height="12" rx="2" fill="#FDFBF7" />
+  <text x="560" y="281" class="txt-label" text-anchor="middle">BOLT 5.0</text>
+
+  <!-- Line 3: Backend REST Router to Frontend -->
+  <path d="M 524 362 L 752 362 Q 760 362 760 362 L 760 362 Q 760 362 768 362 L 794 362" fill="none" stroke="#111827" stroke-width="1.5" marker-end="url(#arrow-dark)" />
+  <rect x="632" y="348" width="60" height="12" rx="2" fill="#FDFBF7" />
+  <text x="662" y="357" class="txt-mono-dark" font-size="8" text-anchor="middle">JSON REST</text>
+
+  <!-- ================= FOOTER / LEGEND ================= -->
+  <line x1="40" y1="440" x2="920" y2="440" stroke="#E5E7EB" stroke-width="1" />
+  <text x="40" y="464" class="txt-mono" font-size="9">STATUS: COGNODB CLOUD HEALTHY</text>
+  <text x="320" y="464" class="txt-body" font-size="10">• Latency: ~260ms • Memory: 68 MB / 512 MB Allocation • Neo4j Official Python Bolt Driver</text>
+</svg>
