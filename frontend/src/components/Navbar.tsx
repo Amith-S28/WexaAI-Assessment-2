@@ -40,45 +40,29 @@ export const Navbar: React.FC<NavbarProps> = ({
       boxShadow: 'var(--shadow-control)'
     }}>
       {/* Brand */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
         <div style={{
           background: 'var(--primary)',
-          padding: '8px',
+          padding: '7px',
           borderRadius: 'var(--radius-control)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: 'var(--shadow-control)'
+          border: '1px solid #111827'
         }}>
-          <FileSpreadsheet size={18} color="#FFFFFF" strokeWidth={2.2} />
+          <FileSpreadsheet size={16} color="#FFFFFF" strokeWidth={2.2} />
         </div>
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <h1 style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: '16px',
-              fontWeight: 700,
-              letterSpacing: '-0.02em',
-              color: 'var(--text-primary)'
-            }}>
-              PaperFlow <span style={{ color: 'var(--primary)', fontWeight: 500 }}>Citation Graph</span>
-            </h1>
-            <span className="aura-tag-mono" style={{ fontSize: '10px', padding: '2px 6px' }}>
-              PRO
-            </span>
-          </div>
-          <div style={{
-            fontSize: '11px',
-            color: 'var(--text-secondary)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '5px',
-            fontFamily: 'var(--font-body)'
+          <h1 style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: '16px',
+            fontWeight: 700,
+            letterSpacing: '-0.02em',
+            color: 'var(--text-primary)',
+            margin: 0
           }}>
-            <span>Powered by</span>
-            <span style={{ color: 'var(--primary)', fontWeight: 600 }}>CognoDB Cloud</span>
-            <span>(openCypher Engine)</span>
-          </div>
+            PaperFlow
+          </h1>
         </div>
       </div>
 
@@ -88,16 +72,16 @@ export const Navbar: React.FC<NavbarProps> = ({
         alignItems: 'center',
         gap: '4px',
         background: 'var(--surface)',
-        padding: '4px',
+        padding: '3px',
         borderRadius: 'var(--radius-pill)',
         border: '1px solid var(--border)'
       }}>
         {[
-          { id: 'explorer', label: 'Graph Explorer', icon: Share2 },
-          { id: 'lineage', label: 'Lineage Tracing', icon: GitFork },
+          { id: 'explorer', label: 'Explorer', icon: Share2 },
+          { id: 'lineage', label: 'Lineage', icon: GitFork },
           { id: 'gaps', label: 'Gap Finder', icon: Sparkles },
-          { id: 'bridges', label: 'Bridge Discovery', icon: Waypoints },
-          { id: 'ingest', label: 'Live Ingest', icon: DownloadCloud },
+          { id: 'bridges', label: 'Bridges', icon: Waypoints },
+          { id: 'ingest', label: 'Ingest', icon: DownloadCloud },
         ].map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -108,21 +92,20 @@ export const Navbar: React.FC<NavbarProps> = ({
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '7px',
-                padding: '7px 15px',
+                gap: '6px',
+                padding: '6px 14px',
                 borderRadius: 'var(--radius-pill)',
-                fontSize: '13px',
+                fontSize: '12px',
                 fontFamily: 'var(--font-display)',
                 fontWeight: isActive ? 600 : 400,
                 color: isActive ? '#FFFFFF' : 'var(--text-secondary)',
                 background: isActive ? 'var(--primary)' : 'transparent',
                 border: 'none',
                 cursor: 'pointer',
-                transition: 'all 0.15s ease',
-                boxShadow: isActive ? 'var(--shadow-control)' : 'none'
+                transition: 'all 0.15s ease'
               }}
             >
-              <Icon size={14} />
+              <Icon size={13} />
               {tab.label}
             </button>
           );

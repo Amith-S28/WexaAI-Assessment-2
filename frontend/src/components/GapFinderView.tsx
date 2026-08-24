@@ -43,27 +43,22 @@ export const GapFinderView: React.FC<GapFinderViewProps> = () => {
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 24px', overflowY: 'auto' }}>
       {/* Header Banner */}
       <div className="aura-panel" style={{ padding: '24px 28px', marginBottom: '24px', background: '#FFFFFF' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-          <span className="aura-tag-mono" style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <Sparkles size={12} /> Graph Topology Inference
-          </span>
-        </div>
         <h2 style={{
           fontFamily: 'var(--font-display)',
-          fontSize: '24px',
-          fontWeight: 800,
+          fontSize: '20px',
+          fontWeight: 700,
           color: 'var(--text-primary)',
           letterSpacing: '-0.02em',
-          marginBottom: '8px'
+          marginBottom: '16px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px'
         }}>
-          Research Gap Finder
+          <Sparkles size={18} color="var(--primary)" /> Research Gap Finder
         </h2>
-        <p style={{ fontSize: '13px', color: 'var(--text-secondary)', maxWidth: '750px', lineHeight: 1.6, fontFamily: 'var(--font-body)' }}>
-          Discovers unstudied intersections across academic disciplines using openCypher triadic closures and co-citation graph analytics.
-        </p>
 
         {/* Sub-tab switchers */}
-        <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+        <div style={{ display: 'flex', gap: '10px' }}>
           <button
             onClick={() => setActiveSubTab('triadic')}
             style={{

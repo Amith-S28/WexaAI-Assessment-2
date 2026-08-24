@@ -5,7 +5,6 @@ import { LineageView } from './components/LineageView';
 import { GapFinderView } from './components/GapFinderView';
 import { BridgeFinderView } from './components/BridgeFinderView';
 import { IngestConsole } from './components/IngestConsole';
-import { NodeInspectorModal } from './components/NodeInspectorModal';
 import type { HealthStatus, SubgraphResponse, GraphNodeData } from './types';
 import { fetchHealth, fetchSubgraph, reseedDatabase } from './api';
 
@@ -119,13 +118,6 @@ export const App: React.FC = () => {
           />
         )}
       </main>
-
-      {/* Slide-over Node Inspector */}
-      <NodeInspectorModal
-        node={selectedNode}
-        onClose={() => setSelectedNode(null)}
-        onTraceLineage={handleTraceLineage}
-      />
     </div>
   );
 };

@@ -131,7 +131,7 @@ export const LineageView: React.FC<LineageViewProps> = ({
         zIndex: 10
       }}>
         {/* Top Filter Selection */}
-        <div style={{ padding: '24px 20px', borderBottom: '1px solid var(--border)' }}>
+        <div style={{ padding: '20px 20px', borderBottom: '1px solid var(--border)' }}>
           <h2 style={{
             fontFamily: 'var(--font-display)',
             fontSize: '15px',
@@ -140,13 +140,10 @@ export const LineageView: React.FC<LineageViewProps> = ({
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
-            marginBottom: '10px'
+            marginBottom: '16px'
           }}>
-            <GitFork size={18} color="var(--primary)" /> Multi-Hop Citation Lineage
+            <GitFork size={17} color="var(--primary)" /> Multi-Hop Citation Lineage
           </h2>
-          <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '18px', lineHeight: 1.5, fontFamily: 'var(--font-body)' }}>
-            Traverses upstream citation chains (<code className="aura-tag-mono" style={{ fontSize: '10px' }}>CITES*1..4</code>) to reveal the foundational roots of modern breakthroughs.
-          </p>
 
           {/* Select Paper */}
           <div style={{ marginBottom: '16px' }}>

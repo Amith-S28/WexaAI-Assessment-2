@@ -397,6 +397,15 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
     setEdges(decoratedEdges);
   }, [rawElements, showAuthors, showConcepts, showConceptEdges, selectedNodeId, setNodes, setEdges]);
 
+  const [hoveredNode, setHoveredNode] = useState<{ id: string; x: number; y: number } | null>(null);
+
+  const hoveredConnectionsCount = useMemo(() => {
+    if (!hoveredNode) return 0;
+    return rawElements.rawEdges.filter(
+      (e) => e.source === hoveredNode.id || e.target === hoveredNode.id
+    ).length;
+  }, [hoveredNode, rawElements.rawEdges]);
+
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onRefresh(searchTerm, minCitations);
@@ -404,8 +413,8 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
 
   const handleNodeClick = useCallback(
     (_: React.MouseEvent, node: Node) => {
-      setSelectedNodeId(node.id);
-      if (node.data) {
+      setSelectedNodeId((prev) => (prev === node.id ? null : node.id));
+      if (node.data && onSelectNode) {
         onSelectNode(node.data as unknown as GraphNodeData);
       }
     },
@@ -428,9 +437,9 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
         alignItems: 'center',
         gap: '12px',
         background: '#FFFFFF',
-        padding: '10px 18px',
+        padding: '8px 16px',
         borderRadius: 'var(--radius-card)',
-        border: '1px solid var(--border)',
+        border: '1px solid #111827',
         boxShadow: 'var(--shadow-card)'
       }}>
         {/* Search Bar */}
@@ -439,7 +448,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
             <Search size={14} style={{ position: 'absolute', left: '10px', color: 'var(--text-muted)' }} />
             <input
               type="text"
-              placeholder="Search paper titles..."
+              placeholder="Search papers..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               style={{
@@ -464,27 +473,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
           </button>
         </form>
 
-        <div style={{ width: '1px', height: '24px', background: 'var(--border)' }} />
-
-        {/* Layout Badge */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '6px',
-          background: 'var(--surface)',
-          padding: '6px 12px',
-          borderRadius: 'var(--radius-control)',
-          border: '1px solid var(--border)',
-          fontSize: '12px',
-          color: 'var(--primary)',
-          fontFamily: 'var(--font-display)',
-          fontWeight: 600
-        }}>
-          <LayoutGrid size={13} />
-          <span>PaperFlow Columns</span>
-        </div>
-
-        <div style={{ width: '1px', height: '24px', background: 'var(--border)' }} />
+        <div style={{ width: '1px', height: '20px', background: 'var(--border)' }} />
 
         {/* Edge / Node Filter Toggles */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '12px', color: 'var(--text-secondary)', fontFamily: 'var(--font-display)' }}>
@@ -495,7 +484,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
               onChange={(e) => setShowConcepts(e.target.checked)}
               style={{ accentColor: 'var(--primary)' }}
             />
-            <span style={{ color: 'var(--text-primary)' }}>Active Domains</span>
+            <span style={{ color: 'var(--text-primary)' }}>Domains</span>
           </label>
 
           <label style={{ display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer' }} title="Toggle domain connecting wires">
@@ -505,7 +494,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
               onChange={(e) => setShowConceptEdges(e.target.checked)}
               style={{ accentColor: 'var(--primary)' }}
             />
-            <span>Domain Wires</span>
+            <span>Wires</span>
           </label>
 
           <label style={{ display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer' }}>
@@ -519,7 +508,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
           </label>
         </div>
 
-        <div style={{ width: '1px', height: '24px', background: 'var(--border)' }} />
+        <div style={{ width: '1px', height: '20px', background: 'var(--border)' }} />
 
         {/* Min Citations Slider */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: 'var(--text-secondary)' }}>
@@ -558,53 +547,34 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
         >
           <RefreshCw size={14} className={isLoading ? 'animate-spin-slow' : ''} />
         </button>
-
-        <div style={{ width: '1px', height: '24px', background: 'var(--border)' }} />
-
-        {/* Paper count pill */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '6px',
-          fontSize: '11px',
-          fontFamily: 'var(--font-mono)',
-          color: 'var(--text-secondary)',
-          background: 'var(--surface)',
-          padding: '4px 10px',
-          borderRadius: '6px',
-          border: '1px solid #111827'
-        }}>
-          <span>Active: <strong style={{ color: 'var(--primary)' }}>{rawElements.rawNodes.filter(n => n.type === 'paper').length}</strong> papers</span>
-        </div>
       </div>
 
-      {/* 1-Hop Focus Indicator Banner */}
+      {/* 1-Hop Focus Indicator */}
       {selectedNodeId && (
         <div style={{
           position: 'absolute',
-          top: '76px',
+          top: '74px',
           left: '24px',
           zIndex: 10,
           background: '#FFFFFF',
-          border: '1.5px solid var(--primary)',
+          border: '1px solid #111827',
           borderRadius: 'var(--radius-pill)',
-          padding: '6px 14px',
+          padding: '5px 12px',
           display: 'flex',
           alignItems: 'center',
           gap: '8px',
-          fontSize: '12px',
+          fontSize: '11px',
           color: 'var(--primary)',
-          fontFamily: 'var(--font-display)',
+          fontFamily: 'var(--font-mono)',
           boxShadow: 'var(--shadow-control)'
         }}>
-          <Info size={13} color="var(--primary)" />
-          <span>Isolating <strong>1-Hop Neighborhood</strong> (direct citations & domain links)</span>
+          <span>1-Hop Isolated</span>
           <button
             onClick={() => setSelectedNodeId(null)}
             style={{
               background: 'transparent',
               border: 'none',
-              color: 'var(--primary)',
+              color: 'var(--text-secondary)',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
@@ -612,44 +582,10 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
             }}
             title="Reset focus"
           >
-            <XCircle size={14} />
+            <XCircle size={13} />
           </button>
         </div>
       )}
-
-      {/* Legend Overlay */}
-      <div style={{
-        position: 'absolute',
-        bottom: '24px',
-        left: '24px',
-        zIndex: 10,
-        background: '#FFFFFF',
-        padding: '12px 16px',
-        borderRadius: 'var(--radius-card)',
-        border: '1px solid var(--border)',
-        fontSize: '11px',
-        color: 'var(--text-secondary)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '7px',
-        boxShadow: 'var(--shadow-card)'
-      }}>
-        <div style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: '2px', display: 'flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--font-display)' }}>
-          <Layers size={13} color="var(--primary)" /> Active Graph: {nodes.length} Nodes
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ width: '12px', height: '12px', borderRadius: '3px', background: 'var(--surface)', border: '1.5px solid var(--border)', display: 'inline-block' }} />
-          <span>Domain Header ({nodes.filter(n => n.type === 'concept').length} Active Fields)</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ width: '10px', height: '10px', borderRadius: '3px', background: '#FFFFFF', border: '1.5px solid var(--primary)', display: 'inline-block' }} />
-          <span>Paper Node (Zero-Overlap)</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ width: '16px', height: '2px', background: 'var(--primary)', display: 'inline-block' }} />
-          <span>Straight Citation Vector</span>
-        </div>
-      </div>
 
       {/* React Flow Core */}
       <ReactFlow
@@ -659,6 +595,23 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
         onEdgesChange={onEdgesChange}
         onNodeClick={handleNodeClick}
         onPaneClick={handlePaneClick}
+        onNodeMouseEnter={(event, node) => {
+          setHoveredNode({
+            id: node.id,
+            x: event.clientX,
+            y: event.clientY,
+          });
+        }}
+        onNodeMouseMove={(event, node) => {
+          setHoveredNode({
+            id: node.id,
+            x: event.clientX,
+            y: event.clientY,
+          });
+        }}
+        onNodeMouseLeave={() => {
+          setHoveredNode(null);
+        }}
         nodeTypes={nodeTypes}
         fitView
         minZoom={0.1}
@@ -675,10 +628,35 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
             return '#E5E7EB';
           }}
           maskColor="rgba(253, 251, 247, 0.7)"
-          style={{ background: '#FFFFFF', border: '1px solid var(--border)', borderRadius: '10px' }}
+          style={{ background: '#FFFFFF', border: '1px solid #111827', borderRadius: '10px' }}
           position="top-right"
         />
       </ReactFlow>
+
+      {/* Cursor Hover Tooltip Box */}
+      {hoveredNode && (
+        <div
+          style={{
+            position: 'fixed',
+            left: hoveredNode.x + 14,
+            top: hoveredNode.y + 14,
+            zIndex: 9999,
+            pointerEvents: 'none',
+            background: '#111827',
+            color: '#FFFFFF',
+            padding: '4px 9px',
+            borderRadius: '6px',
+            fontSize: '11px',
+            fontFamily: 'var(--font-mono)',
+            fontWeight: 600,
+            boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+            whiteSpace: 'nowrap',
+            border: '1px solid rgba(255,255,255,0.15)'
+          }}
+        >
+          {hoveredConnectionsCount} {hoveredConnectionsCount === 1 ? 'connection' : 'connections'}
+        </div>
+      )}
     </div>
   );
 };

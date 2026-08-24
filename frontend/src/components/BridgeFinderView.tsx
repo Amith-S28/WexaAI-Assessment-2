@@ -31,26 +31,21 @@ export const BridgeFinderView: React.FC<BridgeFinderViewProps> = () => {
 
   return (
     <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '32px 24px' }}>
-      {/* Header */}
+      {/* Header & Search */}
       <div className="aura-panel" style={{ padding: '24px 28px', marginBottom: '24px', background: '#FFFFFF' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-          <span className="aura-tag-mono" style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <Waypoints size={12} /> Shortest-Path Betweenness Centrality
-          </span>
-        </div>
         <h2 style={{
           fontFamily: 'var(--font-display)',
-          fontSize: '24px',
-          fontWeight: 800,
+          fontSize: '20px',
+          fontWeight: 700,
           color: 'var(--text-primary)',
           letterSpacing: '-0.02em',
-          marginBottom: '8px'
+          marginBottom: '16px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px'
         }}>
-          Interdisciplinary Bridge Discovery
+          <Waypoints size={18} color="var(--primary)" /> Interdisciplinary Bridges
         </h2>
-        <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '20px', fontFamily: 'var(--font-body)' }}>
-          Finds pivotal papers that act as topological connectors between two distinct research domains across multi-hop citation paths.
-        </p>
 
         {/* Input Form */}
         <form onSubmit={handleSearch} style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>

@@ -44,25 +44,19 @@ export const IngestConsole: React.FC<IngestConsoleProps> = ({ onIngestSuccess })
   return (
     <div style={{ maxWidth: '920px', margin: '0 auto', padding: '32px 24px' }}>
       <div className="aura-panel" style={{ padding: '28px 32px', marginBottom: '24px', background: '#FFFFFF' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-          <span className="aura-tag-mono" style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <DownloadCloud size={12} /> Semantic Scholar Graph Ingestion
-          </span>
-        </div>
         <h2 style={{
           fontFamily: 'var(--font-display)',
-          fontSize: '24px',
-          fontWeight: 800,
+          fontSize: '20px',
+          fontWeight: 700,
           color: 'var(--text-primary)',
           letterSpacing: '-0.02em',
-          marginBottom: '8px'
+          marginBottom: '20px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px'
         }}>
-          On-Demand Academic Paper Ingestion
+          <DownloadCloud size={18} color="var(--primary)" /> Ingest Papers
         </h2>
-        <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '24px', fontFamily: 'var(--font-body)' }}>
-          Expand your knowledge graph dynamically. Enter any academic topic, paper title, or author name.
-          The pipeline streams metadata and 1-hop references from Semantic Scholar and batch-upserts them directly into <strong>CognoDB Cloud</strong> using parameterized openCypher statements.
-        </p>
 
         {/* Form */}
         <form onSubmit={handleIngest} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
