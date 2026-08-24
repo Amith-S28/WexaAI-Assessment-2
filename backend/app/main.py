@@ -58,13 +58,31 @@ app.include_router(lineage.router)
 app.include_router(gaps.router)
 app.include_router(ingest.router)
 
-# Mount frontend dist static files if built
-frontend_dist = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "frontend", "dist"))
-if os.path.exists(frontend_dist):
-    app.mount("/assets", StaticFiles(directory=os.path.join(frontend_dist, "assets")), name="assets")
+# Mount frontend dist static files with multi-path resolution
+possible_paths = [
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "frontend", "dist")),
+    os.path.abspath(os.path.join(os.getcwd(), "frontend", "dist")),
+    "/app/frontend/dist"
+]
 
-    @app.get("/{full_path:path}")
-    async def serve_spa(full_path: str):
+frontend_dist = next((p for p in possible_paths if os.path.exists(p) and os.path.isdir(p)), None)
+
+if frontend_dist and os.path.exists(os.path.join(frontend_dist, "index.html")):
+    logger.info(f"Serving frontend SPA from: {frontend_dist}")
+    assets_dir = os.path.join(frontend_dist, "assets")
+    if os.path.exists(assets_dir):
+        app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
+
+    @app.get("/", include_in_schema=False)
+    async def serve_root():
+        return FileResponse(os.path.join(frontend_dist, "index.html"))
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    async def serve_spa_fallback(full_path: str):
+        if full_path.startswith("api/") or full_path.startswith("docs") or full_path.startswith("openapi.json"):
+            from fastapi import HTTPException
+            raise HTTPException(status_code=404, detail="Not Found")
+            
         file_path = os.path.join(frontend_dist, full_path)
         if os.path.exists(file_path) and os.path.isfile(file_path):
             return FileResponse(file_path)
