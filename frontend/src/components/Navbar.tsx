@@ -40,50 +40,43 @@ export const Navbar: React.FC<NavbarProps> = ({
       zIndex: 50,
       boxShadow: '0 1px 2px rgba(0, 0, 0, 0.02)'
     }}>
-      {/* Notion Workspace & Breadcrumbs */}
+      {/* PaperFlow Brand */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        {/* Notion Official "N" Cube Monogram */}
         <div style={{
           width: '28px',
           height: '28px',
-          borderRadius: '5px',
-          background: '#000000',
+          borderRadius: '6px',
+          background: 'var(--primary)',
           color: '#FFFFFF',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          fontFamily: 'var(--font-display)',
-          fontWeight: 800,
-          fontSize: '16px',
-          letterSpacing: '-0.05em',
-          userSelect: 'none',
           boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
         }}>
-          N
+          <Share2 size={15} strokeWidth={2.2} />
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{
             fontFamily: 'var(--font-display)',
-            fontSize: '14px',
-            fontWeight: 600,
+            fontSize: '15px',
+            fontWeight: 700,
             color: 'var(--ink)',
-            letterSpacing: '-0.01em'
+            letterSpacing: '-0.02em'
           }}>
-            Notion
+            PaperFlow
           </span>
-          <ChevronRight size={14} color="var(--ink-faint)" />
           <span style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: '14px',
-            fontWeight: 500,
-            color: 'var(--ink-secondary)',
-            letterSpacing: '-0.01em',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '5px'
+            fontSize: '11px',
+            fontFamily: 'var(--font-mono)',
+            color: 'var(--ink-muted)',
+            background: 'var(--canvas-soft)',
+            border: '1px solid var(--hairline)',
+            padding: '1px 6px',
+            borderRadius: 'var(--radius-xs)',
+            fontWeight: 500
           }}>
-            <Database size={13} color="var(--primary)" /> PaperFlow Graph
+            Knowledge Graph
           </span>
         </div>
       </div>
