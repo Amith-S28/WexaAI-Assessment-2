@@ -32,6 +32,8 @@ def create_html_and_pdf():
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
     }}
 
     body {{
@@ -85,7 +87,7 @@ def create_html_and_pdf():
       padding: 2px 7px;
       border-radius: 4px;
       font-size: 7.5pt;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'JetBrains Mono', 'Consolas', monospace;
       font-weight: 600;
     }}
 
@@ -154,7 +156,7 @@ def create_html_and_pdf():
     .diagram-caption {{
       font-size: 7.5pt;
       color: #615d59;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'JetBrains Mono', 'Consolas', monospace;
       margin-top: 4px;
       font-weight: 500;
     }}
@@ -190,30 +192,32 @@ def create_html_and_pdf():
 
     /* Code Blocks */
     pre, code {{
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'JetBrains Mono', 'Consolas', monospace;
       font-size: 7.5pt;
     }}
 
     pre {{
-      background: #111827;
-      color: #f9fafb;
+      background: #f6f5f4;
+      border: 1px solid #d4d0ca;
+      border-left: 3px solid #0075de;
+      color: #111827;
       padding: 7px 10px;
-      border-radius: 5px;
+      border-radius: 4px;
       margin: 5px 0 8px 0;
       overflow-x: hidden;
       white-space: pre-wrap;
-      line-height: 1.35;
+      line-height: 1.4;
       page-break-inside: avoid;
     }}
 
     .highlight {{
-      color: #62aef0;
-      font-weight: 600;
+      color: #b43b00;
+      font-weight: 700;
     }}
 
     .keyword {{
-      color: #ff64c8;
-      font-weight: 700;
+      color: #005bab;
+      font-weight: 800;
     }}
 
     /* Callout Box */
