@@ -45,6 +45,16 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  caret-color: #111827;
+}
+
+::selection {
+  background: #111827;
+  color: #FFFFFF;
+}
+
+input, textarea, select, [contenteditable] {
+  caret-color: #111827 !important;
 }
 
 body {
