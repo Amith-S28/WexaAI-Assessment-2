@@ -77,16 +77,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  caret-color: #000000;
-}
-
-::selection {
-  background: var(--primary);
-  color: #ffffff;
-}
-
-input, textarea, select, [contenteditable] {
-  caret-color: #000000 !important;
 }
 
 body {
