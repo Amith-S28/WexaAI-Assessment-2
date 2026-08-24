@@ -74,13 +74,16 @@ class Neo4jClient:
                 
                 node_rec = session.run("MATCH (n) RETURN count(n) AS nodeCount").single()
                 edge_rec = session.run("MATCH ()-[r]->() RETURN count(r) AS edgeCount").single()
+                paper_rec = session.run("MATCH (p:Paper) RETURN count(p) AS paperCount").single()
                 
                 node_count = node_rec["nodeCount"] if node_rec else 0
                 edge_count = edge_rec["edgeCount"] if edge_rec else 0
+                paper_count = paper_rec["paperCount"] if paper_rec else 0
 
                 return {
                     "status": "healthy",
                     "latency_ms": latency_ms,
+                    "papers": paper_count,
                     "nodes": node_count,
                     "relationships": edge_count,
                     "database": "CognoDB Cloud",
@@ -92,6 +95,7 @@ class Neo4jClient:
             return {
                 "status": "unhealthy",
                 "latency_ms": latency_ms,
+                "papers": 0,
                 "nodes": 0,
                 "relationships": 0,
                 "database": "CognoDB Cloud",

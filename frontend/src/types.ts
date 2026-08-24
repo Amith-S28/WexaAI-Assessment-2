@@ -1,6 +1,7 @@
 export interface HealthStatus {
   status: 'healthy' | 'unhealthy';
   latency_ms: number;
+  papers?: number;
   nodes: number;
   relationships: number;
   database: string;

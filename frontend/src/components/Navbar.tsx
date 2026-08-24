@@ -131,25 +131,37 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Right Stats & Reseed */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-        {/* Health status badge */}
+        {/* Health status badge & Paper count */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
           gap: '10px',
           background: 'var(--surface)',
-          padding: '6px 12px',
+          padding: '6px 14px',
           borderRadius: 'var(--radius-control)',
-          border: '1px solid var(--border)',
+          border: '1px solid #111827',
           fontSize: '12px',
           fontFamily: 'var(--font-mono)'
         }}>
           <div style={{
-            width: '7px',
-            height: '7px',
+            width: '8px',
+            height: '8px',
             borderRadius: '50%',
-            background: health?.status === 'healthy' ? '#10B981' : '#EF4444'
+            background: health?.status === 'healthy' ? '#10B981' : '#EF4444',
+            boxShadow: health?.status === 'healthy' ? '0 0 6px rgba(16,185,129,0.5)' : 'none'
           }} />
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '9px', color: 'var(--text-secondary)' }}>
+            <span style={{
+              background: '#FFF7ED',
+              color: 'var(--primary)',
+              padding: '2px 8px',
+              borderRadius: '4px',
+              border: '1px solid var(--primary)',
+              fontWeight: 700
+            }}>
+              📚 {health?.papers ?? '...'} Papers
+            </span>
+            <span style={{ color: '#D1D5DB' }}>|</span>
             <span>
               <strong style={{ color: 'var(--text-primary)' }}>{health?.nodes ?? '...'}</strong> nodes
             </span>
@@ -158,8 +170,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               <strong style={{ color: 'var(--text-primary)' }}>{health?.relationships ?? '...'}</strong> edges
             </span>
             <span style={{ color: '#D1D5DB' }}>|</span>
-            <span style={{ color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '3px' }}>
-              <Activity size={11} /> {health?.latency_ms ? `${health.latency_ms}ms` : '...'}
+            <span style={{ color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '3px', fontWeight: 600 }}>
+              <Activity size={12} /> {health?.latency_ms ? `${health.latency_ms}ms` : '...'}
             </span>
           </div>
         </div>

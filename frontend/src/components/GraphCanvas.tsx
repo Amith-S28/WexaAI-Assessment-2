@@ -558,6 +558,24 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
         >
           <RefreshCw size={14} className={isLoading ? 'animate-spin-slow' : ''} />
         </button>
+
+        <div style={{ width: '1px', height: '24px', background: 'var(--border)' }} />
+
+        {/* Paper count pill */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px',
+          fontSize: '11px',
+          fontFamily: 'var(--font-mono)',
+          color: 'var(--text-secondary)',
+          background: 'var(--surface)',
+          padding: '4px 10px',
+          borderRadius: '6px',
+          border: '1px solid #111827'
+        }}>
+          <span>Active: <strong style={{ color: 'var(--primary)' }}>{rawElements.rawNodes.filter(n => n.type === 'paper').length}</strong> papers</span>
+        </div>
       </div>
 
       {/* 1-Hop Focus Indicator Banner */}
