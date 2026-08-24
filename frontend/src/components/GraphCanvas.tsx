@@ -275,7 +275,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
       const isCitation = e.type === 'CITES';
       const isInfluential = !!e.properties?.is_influential;
 
-      let stroke = isCitation ? '#E65C00' : '#FFB380';
+      let stroke = isCitation ? '#0075de' : '#62aef0';
       let strokeWidth = isInfluential ? 2.5 : 1.5;
 
       return {
@@ -287,7 +287,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
         style: {
           stroke,
           strokeWidth,
-          opacity: isCitation ? 0.7 : 0.4,
+          opacity: isCitation ? 0.75 : 0.45,
         },
         markerEnd: {
           type: MarkerType.ArrowClosed,
@@ -327,7 +327,9 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
       return;
     }
 
-    const neighborNodeIds = new Set<string>([selectedNodeId]);
+    const neighborNodeIds = new Set<string>();
+    neighborNodeIds.add(selectedNodeId);
+
     const highlightedEdgeIds = new Set<string>();
 
     layoutedEdges.forEach((e) => {
@@ -362,7 +364,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
           type: 'straight',
           animated: true,
           style: {
-            stroke: '#E65C00',
+            stroke: '#0075de',
             strokeWidth: 3,
             opacity: 1.0,
           },
@@ -370,7 +372,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
             type: MarkerType.ArrowClosed,
             width: 15,
             height: 15,
-            color: '#E65C00',
+            color: '#0075de',
           },
         };
       } else {
@@ -379,7 +381,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
           type: 'straight',
           animated: false,
           style: {
-            stroke: '#E5E7EB',
+            stroke: '#e6e6e6',
             strokeWidth: 1,
             opacity: 0.15,
           },
@@ -387,7 +389,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
             type: MarkerType.ArrowClosed,
             width: 10,
             height: 10,
-            color: '#E5E7EB',
+            color: '#e6e6e6',
           },
         };
       }
@@ -618,17 +620,17 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
         maxZoom={2.0}
         defaultEdgeOptions={{ type: 'straight' }}
       >
-        <Background color="#E5E7EB" gap={22} size={1} variant={BackgroundVariant.Dots} />
+        <Background color="#d4d0ca" gap={22} size={1} variant={BackgroundVariant.Dots} />
         <Controls position="bottom-right" />
         <MiniMap
           nodeColor={(n) => {
-            if (n.type === 'concept') return '#E65C00';
-            if (n.type === 'paper') return '#FFB380';
-            if (n.type === 'author') return '#D1D5DB';
-            return '#E5E7EB';
+            if (n.type === 'concept') return '#2a9d99';
+            if (n.type === 'paper') return '#0075de';
+            if (n.type === 'author') return '#d6b6f6';
+            return '#e6e6e6';
           }}
-          maskColor="rgba(253, 251, 247, 0.7)"
-          style={{ background: '#FFFFFF', border: '1px solid #111827', borderRadius: '10px' }}
+          maskColor="rgba(246, 245, 244, 0.75)"
+          style={{ background: '#FFFFFF', border: '1px solid var(--hairline)', borderRadius: '10px' }}
           position="top-right"
         />
       </ReactFlow>

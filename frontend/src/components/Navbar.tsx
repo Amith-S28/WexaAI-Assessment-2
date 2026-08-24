@@ -119,40 +119,40 @@ export const Navbar: React.FC<NavbarProps> = ({
           display: 'flex',
           alignItems: 'center',
           gap: '10px',
-          background: 'var(--surface)',
+          background: 'var(--canvas-soft)',
           padding: '6px 14px',
-          borderRadius: 'var(--radius-control)',
-          border: '1px solid #111827',
+          borderRadius: 'var(--radius-md)',
+          border: '1px solid var(--hairline)',
           fontSize: '12px',
           fontFamily: 'var(--font-mono)'
         }}>
           <div style={{
-            width: '8px',
-            height: '8px',
+            width: '7px',
+            height: '7px',
             borderRadius: '50%',
-            background: health?.status === 'healthy' ? '#10B981' : '#EF4444',
-            boxShadow: health?.status === 'healthy' ? '0 0 6px rgba(16,185,129,0.5)' : 'none'
+            background: health?.status === 'healthy' ? '#1aae39' : '#e03e3e',
+            boxShadow: health?.status === 'healthy' ? '0 0 5px rgba(26,174,57,0.4)' : 'none'
           }} />
-          <div style={{ display: 'flex', alignItems: 'center', gap: '9px', color: 'var(--text-secondary)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '9px', color: 'var(--ink-secondary)' }}>
             <span style={{
-              background: '#FFF7ED',
+              background: 'rgba(0, 117, 222, 0.08)',
               color: 'var(--primary)',
               padding: '2px 8px',
-              borderRadius: '4px',
-              border: '1px solid var(--primary)',
-              fontWeight: 700
+              borderRadius: 'var(--radius-pill)',
+              border: '1px solid rgba(0, 117, 222, 0.25)',
+              fontWeight: 600
             }}>
               📚 {health?.papers ?? '...'} Papers
             </span>
-            <span style={{ color: '#D1D5DB' }}>|</span>
+            <span style={{ color: '#d4d0ca' }}>|</span>
             <span>
-              <strong style={{ color: 'var(--text-primary)' }}>{health?.nodes ?? '...'}</strong> nodes
+              <strong style={{ color: 'var(--ink)' }}>{health?.nodes ?? '...'}</strong> nodes
             </span>
-            <span style={{ color: '#D1D5DB' }}>|</span>
+            <span style={{ color: '#d4d0ca' }}>|</span>
             <span>
-              <strong style={{ color: 'var(--text-primary)' }}>{health?.relationships ?? '...'}</strong> edges
+              <strong style={{ color: 'var(--ink)' }}>{health?.relationships ?? '...'}</strong> edges
             </span>
-            <span style={{ color: '#D1D5DB' }}>|</span>
+            <span style={{ color: '#d4d0ca' }}>|</span>
             <span style={{ color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '3px', fontWeight: 600 }}>
               <Activity size={12} /> {health?.latency_ms ? `${health.latency_ms}ms` : '...'}
             </span>
@@ -165,7 +165,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           disabled={isReseeding}
           title="Reload curated landmark AI/ML seed dataset"
           className="aura-btn-secondary"
-          style={{ fontSize: '12px', padding: '6px 12px' }}
+          style={{ fontSize: '12px', padding: '6px 14px', borderRadius: 'var(--radius-md)' }}
         >
           <RotateCcw size={13} className={isReseeding ? 'animate-spin-slow' : ''} />
           {isReseeding ? 'Seeding...' : 'Reseed Data'}

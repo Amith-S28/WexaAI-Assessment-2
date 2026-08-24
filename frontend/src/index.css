@@ -1,41 +1,73 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
-  /* PaperFlow Design Layout Tokens */
-  --primary: #E65C00;
-  --primary-hover: #CC5200;
-  --secondary: #FDFBF7;
-  --accent: #FFB380;
-  --background: #FDFBF7;
-  --surface: #F7F4EB;
-  --surface-card: #FFFFFF;
-  --surface-hover: #F2EFE4;
-  --text-primary: #111827;
-  --text-secondary: #4B5563;
-  --text-muted: #9CA3AF;
-  --border: #E5E7EB;
-  --border-active: #E65C00;
+  /* Notion Design System Tokens */
+  --primary: #0075de;
+  --primary-hover: #005bab;
+  --primary-active: #005bab;
+  --secondary: #213183;
+  --on-primary: #ffffff;
+  
+  --canvas: #ffffff;
+  --canvas-soft: #f6f5f4;
+  --background: #f6f5f4;
+  --surface: #ffffff;
+  --surface-card: #ffffff;
+  --surface-hover: #f1f0ee;
+  
+  --ink: #000000;
+  --ink-secondary: #31302e;
+  --ink-muted: #615d59;
+  --ink-faint: #a39e98;
+  
+  --text-primary: #000000;
+  --text-secondary: #31302e;
+  --text-muted: #615d59;
+  
+  --hairline: #e6e6e6;
+  --border: #e6e6e6;
+  --border-active: #0075de;
+
+  /* Notion Sticker Palette */
+  --accent-sky: #62aef0;
+  --accent-purple: #d6b6f6;
+  --accent-purple-deep: #391c57;
+  --accent-pink: #ff64c8;
+  --accent-orange: #dd5b00;
+  --accent-orange-deep: #793400;
+  --accent-teal: #2a9d99;
+  --accent-green: #1aae39;
+  --accent-brown: #523410;
 
   /* Typography */
-  --font-display: 'Inter', -apple-system, sans-serif;
-  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-display: 'Inter', -apple-system, system-ui, sans-serif;
+  --font-body: 'Inter', -apple-system, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   /* Spacing */
-  --spacing-base: 8px;
-  --spacing-gap: 16px;
-  --spacing-card: 24px;
-  --spacing-section: 80px;
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 28px;
+  --spacing-xxl: 32px;
 
   /* Radii */
-  --radius-card: 16px;
+  --radius-xs: 4px;
+  --radius-sm: 5px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-card: 12px;
   --radius-control: 8px;
   --radius-pill: 9999px;
 
-  /* Soft Tactile Paper Shadows */
-  --shadow-card: 0 4px 14px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.04);
-  --shadow-control: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-elevated: 0 10px 25px rgba(0, 0, 0, 0.08);
+  /* Notion Barely-There Micro-Shadows */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-control: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-elevated: 0 4px 14px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-modal: 0 20px 40px rgba(0, 0, 0, 0.08);
 
   --transition-fast: 0.15s ease;
   --transition-normal: 0.2s ease;
@@ -45,61 +77,62 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  caret-color: #111827;
+  caret-color: #000000;
 }
 
 ::selection {
-  background: #111827;
-  color: #FFFFFF;
+  background: var(--primary);
+  color: #ffffff;
 }
 
 input, textarea, select, [contenteditable] {
-  caret-color: #111827 !important;
+  caret-color: #000000 !important;
 }
 
 body {
   font-family: var(--font-body);
-  background-color: var(--background);
-  color: var(--text-primary);
+  background-color: var(--canvas-soft);
+  color: var(--ink);
   min-height: 100vh;
   overflow-x: hidden;
-  line-height: 1.6;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
-/* PaperFlow Panel & Card Surfaces */
+/* Notion Panel & Card Surfaces */
 .aura-panel {
-  background: var(--surface-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
 }
 
 .aura-card {
-  background: var(--surface-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   box-shadow: var(--shadow-card);
 }
 
 .aura-card:hover {
-  border-color: var(--primary);
+  border-color: #c4c4c4;
   box-shadow: var(--shadow-elevated);
 }
 
-/* Action Buttons */
+/* Notion Buttons */
 .aura-btn-primary {
   background: var(--primary);
-  color: #FFFFFF;
+  color: #ffffff;
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 14px;
   border: 1px solid var(--primary);
-  border-radius: var(--radius-control);
-  padding: 9px 18px;
+  border-radius: var(--radius-pill);
+  padding: 7px 16px;
   cursor: pointer;
   box-shadow: var(--shadow-control);
-  transition: background-color var(--transition-fast);
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -110,131 +143,157 @@ body {
   border-color: var(--primary-hover);
 }
 
+.aura-btn-primary:active {
+  background: var(--primary-active);
+  transform: scale(0.98);
+}
+
 .aura-btn-secondary {
-  background: #FFFFFF;
-  color: var(--text-primary);
+  background: var(--surface);
+  color: var(--ink);
   font-family: var(--font-display);
   font-weight: 500;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-control);
-  padding: 8px 16px;
+  font-size: 14px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-pill);
+  padding: 7px 16px;
   cursor: pointer;
   box-shadow: var(--shadow-control);
   transition: border-color var(--transition-fast), background-color var(--transition-fast);
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .aura-btn-secondary:hover {
-  background: var(--surface);
-  border-color: var(--primary);
+  background: var(--surface-hover);
+  border-color: #d1d1d1;
 }
 
-/* Monospace Technical Badges */
+.aura-btn-utility {
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 13px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.aura-btn-utility:hover {
+  background: var(--surface-hover);
+}
+
+/* Notion Badges & Tags */
 .aura-tag-mono {
+  display: inline-flex;
+  align-items: center;
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 600;
-  line-height: 1.2;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  padding: 3px 8px;
-  border-radius: var(--radius-control);
-  background: var(--surface);
   color: var(--primary);
-  border: 1px solid rgba(230, 92, 0, 0.25);
+  background: rgba(0, 117, 222, 0.08);
+  border: 1px solid rgba(0, 117, 222, 0.2);
+  border-radius: var(--radius-pill);
+  padding: 3px 8px;
 }
 
-/* Scrollbars */
+.aura-tag-sticker-teal {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  color: #1b6360;
+  background: #e6f6f5;
+  border: 1px solid rgba(42, 157, 153, 0.3);
+  border-radius: var(--radius-pill);
+  padding: 2px 8px;
+}
+
+.aura-tag-sticker-purple {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  color: #512579;
+  background: #f7edff;
+  border: 1px solid rgba(214, 182, 246, 0.4);
+  border-radius: var(--radius-pill);
+  padding: 2px 8px;
+}
+
+.aura-tag-sticker-orange {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  color: #8c3a00;
+  background: #fff0e6;
+  border: 1px solid rgba(221, 91, 0, 0.3);
+  border-radius: var(--radius-pill);
+  padding: 2px 8px;
+}
+
+/* Custom Notion Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: var(--canvas-soft);
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #D1D5DB;
-  border-radius: var(--radius-pill);
+  background: #d4d0ca;
+  border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
+  background: #bab4ac;
 }
 
-/* React Flow Canvas */
-.react-flow__renderer {
-  background-color: var(--background) !important;
-}
-
-.react-flow__controls {
-  background: #FFFFFF !important;
-  border: 1px solid var(--border) !important;
-  border-radius: var(--radius-control) !important;
-  box-shadow: var(--shadow-card) !important;
-}
-
-.react-flow__controls-button {
-  background: transparent !important;
-  border-bottom: 1px solid var(--border) !important;
-  color: var(--text-secondary) !important;
-  fill: var(--text-secondary) !important;
-}
-
-.react-flow__controls-button:hover {
-  background: var(--surface) !important;
-  color: var(--primary) !important;
-  fill: var(--primary) !important;
-}
-
-.react-flow__attribution {
-  display: none !important;
-}
-
-/* Solid Flow Nodes */
+/* Flow Node Styles */
 .flow-node {
-  padding: 14px 18px;
   border-radius: var(--radius-card);
-  font-size: 13px;
-  cursor: pointer;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-  min-width: 220px;
-  max-width: 290px;
-  box-shadow: var(--shadow-card);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
 
 .flow-node-paper {
-  background: #FFFFFF;
-  border: 1.5px solid var(--border);
-}
-.flow-node-paper:hover, .flow-node-paper.selected {
-  border-color: var(--primary);
-  box-shadow: var(--shadow-elevated);
-}
-
-.flow-node-author {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-pill);
-}
-.flow-node-author:hover, .flow-node-author.selected {
-  border-color: var(--primary);
+  width: 270px;
+  padding: 12px 14px;
 }
 
 .flow-node-concept {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-control);
-}
-.flow-node-concept:hover, .flow-node-concept.selected {
-  border-color: var(--primary);
+  width: 270px;
+  padding: 10px 14px;
 }
 
-@keyframes spinSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.flow-node-author {
+  width: 170px;
+  padding: 8px 12px;
 }
 
-.animate-spin-slow {
-  animation: spinSlow 12s linear infinite;
+/* React Flow Chrome Overrides */
+.react-flow__controls {
+  box-shadow: var(--shadow-card) !important;
+  border: 1px solid var(--hairline) !important;
+  border-radius: var(--radius-md) !important;
+  overflow: hidden;
+}
+
+.react-flow__controls-button {
+  background: #ffffff !important;
+  border-bottom: 1px solid var(--hairline) !important;
+  color: var(--ink) !important;
+}
+
+.react-flow__controls-button:hover {
+  background: var(--surface-hover) !important;
 }
