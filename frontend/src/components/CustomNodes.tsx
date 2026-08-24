@@ -29,8 +29,11 @@ export const PaperNode = memo(({ data, selected }: NodeProps) => {
         position: 'relative',
         opacity: isDimmed ? 0.25 : 1,
         transform: isSelected ? 'scale(1.03)' : 'none',
-        borderColor: isSelected ? 'var(--primary)' : isHighlighted ? 'var(--accent)' : 'var(--border)',
-        borderWidth: isSelected || isHighlighted ? '2px' : '1px',
+        border: isSelected
+          ? '2px solid var(--primary)'
+          : isHighlighted
+          ? '2px solid var(--accent)'
+          : '1px solid #111827', // Thin black boundary
         background: isSelected ? '#FFFFFF' : 'var(--surface-card)',
         boxShadow: isSelected ? '0 8px 25px rgba(230, 92, 0, 0.25)' : 'var(--shadow-card)',
         transition: 'all 0.15s ease',
@@ -38,17 +41,17 @@ export const PaperNode = memo(({ data, selected }: NodeProps) => {
       }}
     >
       {/* 4-Side Closest Connection Handles */}
-      <Handle type="target" position={Position.Top} id="target-top" style={{ background: '#E65C00', width: 7, height: 7 }} />
-      <Handle type="source" position={Position.Top} id="source-top" style={{ background: '#E65C00', width: 7, height: 7 }} />
+      <Handle type="target" position={Position.Top} id="target-top" style={{ background: '#E65C00', width: 7, height: 7, border: '1px solid #111827' }} />
+      <Handle type="source" position={Position.Top} id="source-top" style={{ background: '#E65C00', width: 7, height: 7, border: '1px solid #111827' }} />
 
-      <Handle type="target" position={Position.Right} id="target-right" style={{ background: '#E65C00', width: 7, height: 7 }} />
-      <Handle type="source" position={Position.Right} id="source-right" style={{ background: '#E65C00', width: 7, height: 7 }} />
+      <Handle type="target" position={Position.Right} id="target-right" style={{ background: '#E65C00', width: 7, height: 7, border: '1px solid #111827' }} />
+      <Handle type="source" position={Position.Right} id="source-right" style={{ background: '#E65C00', width: 7, height: 7, border: '1px solid #111827' }} />
 
-      <Handle type="target" position={Position.Bottom} id="target-bottom" style={{ background: '#E65C00', width: 7, height: 7 }} />
-      <Handle type="source" position={Position.Bottom} id="source-bottom" style={{ background: '#E65C00', width: 7, height: 7 }} />
+      <Handle type="target" position={Position.Bottom} id="target-bottom" style={{ background: '#E65C00', width: 7, height: 7, border: '1px solid #111827' }} />
+      <Handle type="source" position={Position.Bottom} id="source-bottom" style={{ background: '#E65C00', width: 7, height: 7, border: '1px solid #111827' }} />
 
-      <Handle type="target" position={Position.Left} id="target-left" style={{ background: '#E65C00', width: 7, height: 7 }} />
-      <Handle type="source" position={Position.Left} id="source-left" style={{ background: '#E65C00', width: 7, height: 7 }} />
+      <Handle type="target" position={Position.Left} id="target-left" style={{ background: '#E65C00', width: 7, height: 7, border: '1px solid #111827' }} />
+      <Handle type="source" position={Position.Left} id="source-left" style={{ background: '#E65C00', width: 7, height: 7, border: '1px solid #111827' }} />
 
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
         <div style={{
@@ -58,7 +61,7 @@ export const PaperNode = memo(({ data, selected }: NodeProps) => {
           color: isSelected ? '#FFFFFF' : '#E65C00',
           flexShrink: 0,
           marginTop: '2px',
-          border: '1px solid var(--border)',
+          border: '1px solid #111827',
           transition: 'all 0.15s ease'
         }}>
           <FileText size={16} />
@@ -66,7 +69,7 @@ export const PaperNode = memo(({ data, selected }: NodeProps) => {
         <div style={{ overflow: 'hidden', flex: 1 }}>
           <div style={{
             fontFamily: 'var(--font-display)',
-            fontWeight: 600,
+            fontWeight: 700,
             fontSize: '13px',
             color: 'var(--text-primary)',
             whiteSpace: 'nowrap',
@@ -99,7 +102,7 @@ export const PaperNode = memo(({ data, selected }: NodeProps) => {
             padding: '2px 7px',
             borderRadius: 'var(--radius-control)',
             marginTop: '6px',
-            border: '1px solid rgba(230, 92, 0, 0.2)'
+            border: '1px solid #111827'
           }}>
             <Award size={11} />
             {citationCount.toLocaleString()} cites
@@ -124,24 +127,27 @@ export const AuthorNode = memo(({ data, selected }: NodeProps) => {
         minWidth: '140px',
         padding: '8px 14px',
         opacity: isDimmed ? 0.25 : 1,
-        borderColor: isSelected ? 'var(--primary)' : isHighlighted ? 'var(--accent)' : 'var(--border)',
-        borderWidth: isSelected || isHighlighted ? '2px' : '1px',
+        border: isSelected
+          ? '2px solid var(--primary)'
+          : isHighlighted
+          ? '2px solid var(--accent)'
+          : '1px solid #111827', // Thin black boundary
         background: 'var(--surface)',
         transition: 'all 0.15s ease',
         zIndex: isSelected ? 30 : isHighlighted ? 20 : 1,
       }}
     >
-      <Handle type="target" position={Position.Top} id="target-top" style={{ background: '#E65C00', width: 6, height: 6 }} />
-      <Handle type="source" position={Position.Top} id="source-top" style={{ background: '#E65C00', width: 6, height: 6 }} />
+      <Handle type="target" position={Position.Top} id="target-top" style={{ background: '#E65C00', width: 6, height: 6, border: '1px solid #111827' }} />
+      <Handle type="source" position={Position.Top} id="source-top" style={{ background: '#E65C00', width: 6, height: 6, border: '1px solid #111827' }} />
 
-      <Handle type="target" position={Position.Right} id="target-right" style={{ background: '#E65C00', width: 6, height: 6 }} />
-      <Handle type="source" position={Position.Right} id="source-right" style={{ background: '#E65C00', width: 6, height: 6 }} />
+      <Handle type="target" position={Position.Right} id="target-right" style={{ background: '#E65C00', width: 6, height: 6, border: '1px solid #111827' }} />
+      <Handle type="source" position={Position.Right} id="source-right" style={{ background: '#E65C00', width: 6, height: 6, border: '1px solid #111827' }} />
 
-      <Handle type="target" position={Position.Bottom} id="target-bottom" style={{ background: '#E65C00', width: 6, height: 6 }} />
-      <Handle type="source" position={Position.Bottom} id="source-bottom" style={{ background: '#E65C00', width: 6, height: 6 }} />
+      <Handle type="target" position={Position.Bottom} id="target-bottom" style={{ background: '#E65C00', width: 6, height: 6, border: '1px solid #111827' }} />
+      <Handle type="source" position={Position.Bottom} id="source-bottom" style={{ background: '#E65C00', width: 6, height: 6, border: '1px solid #111827' }} />
 
-      <Handle type="target" position={Position.Left} id="target-left" style={{ background: '#E65C00', width: 6, height: 6 }} />
-      <Handle type="source" position={Position.Left} id="source-left" style={{ background: '#E65C00', width: 6, height: 6 }} />
+      <Handle type="target" position={Position.Left} id="target-left" style={{ background: '#E65C00', width: 6, height: 6, border: '1px solid #111827' }} />
+      <Handle type="source" position={Position.Left} id="source-left" style={{ background: '#E65C00', width: 6, height: 6, border: '1px solid #111827' }} />
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
         <div style={{
@@ -149,7 +155,7 @@ export const AuthorNode = memo(({ data, selected }: NodeProps) => {
           padding: '5px',
           borderRadius: '50%',
           color: 'var(--primary)',
-          border: '1px solid var(--border)',
+          border: '1px solid #111827',
           flexShrink: 0
         }}>
           <User size={14} />
@@ -188,7 +194,7 @@ export const ConceptNode = memo(({ data, selected }: NodeProps) => {
           ? '2px solid var(--primary)'
           : isHighlighted
           ? '2px solid var(--accent)'
-          : '1px solid var(--border)',
+          : '1px solid #111827', // Thin black boundary
         borderRadius: 'var(--radius-card)',
         boxShadow: 'var(--shadow-card)',
         opacity: isDimmed ? 0.25 : 1,
@@ -196,17 +202,17 @@ export const ConceptNode = memo(({ data, selected }: NodeProps) => {
         zIndex: isSelected ? 30 : isHighlighted ? 20 : 1,
       }}
     >
-      <Handle type="target" position={Position.Top} id="target-top" style={{ background: '#E65C00', width: 7, height: 7 }} />
-      <Handle type="source" position={Position.Top} id="source-top" style={{ background: '#E65C00', width: 7, height: 7 }} />
+      <Handle type="target" position={Position.Top} id="target-top" style={{ background: '#E65C00', width: 7, height: 7, border: '1px solid #111827' }} />
+      <Handle type="source" position={Position.Top} id="source-top" style={{ background: '#E65C00', width: 7, height: 7, border: '1px solid #111827' }} />
 
-      <Handle type="target" position={Position.Right} id="target-right" style={{ background: '#E65C00', width: 7, height: 7 }} />
-      <Handle type="source" position={Position.Right} id="source-right" style={{ background: '#E65C00', width: 7, height: 7 }} />
+      <Handle type="target" position={Position.Right} id="target-right" style={{ background: '#E65C00', width: 7, height: 7, border: '1px solid #111827' }} />
+      <Handle type="source" position={Position.Right} id="source-right" style={{ background: '#E65C00', width: 7, height: 7, border: '1px solid #111827' }} />
 
-      <Handle type="target" position={Position.Bottom} id="target-bottom" style={{ background: '#E65C00', width: 7, height: 7 }} />
-      <Handle type="source" position={Position.Bottom} id="source-bottom" style={{ background: '#E65C00', width: 7, height: 7 }} />
+      <Handle type="target" position={Position.Bottom} id="target-bottom" style={{ background: '#E65C00', width: 7, height: 7, border: '1px solid #111827' }} />
+      <Handle type="source" position={Position.Bottom} id="source-bottom" style={{ background: '#E65C00', width: 7, height: 7, border: '1px solid #111827' }} />
 
-      <Handle type="target" position={Position.Left} id="target-left" style={{ background: '#E65C00', width: 7, height: 7 }} />
-      <Handle type="source" position={Position.Left} id="source-left" style={{ background: '#E65C00', width: 7, height: 7 }} />
+      <Handle type="target" position={Position.Left} id="target-left" style={{ background: '#E65C00', width: 7, height: 7, border: '1px solid #111827' }} />
+      <Handle type="source" position={Position.Left} id="source-left" style={{ background: '#E65C00', width: 7, height: 7, border: '1px solid #111827' }} />
 
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -215,7 +221,7 @@ export const ConceptNode = memo(({ data, selected }: NodeProps) => {
             padding: '5px',
             borderRadius: '6px',
             color: 'var(--primary)',
-            border: '1px solid var(--border)'
+            border: '1px solid #111827'
           }}>
             <Layers size={14} />
           </div>
@@ -236,7 +242,7 @@ export const ConceptNode = memo(({ data, selected }: NodeProps) => {
               fontFamily: 'var(--font-mono)',
               fontSize: '10px',
               color: 'var(--primary)',
-              fontWeight: 600
+              fontWeight: 700
             }}>
               DOMAIN FIELD
             </div>

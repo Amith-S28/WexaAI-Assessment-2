@@ -19,7 +19,7 @@ export async function fetchHealth(): Promise<HealthStatus> {
 
 export async function fetchSubgraph(
   search?: string,
-  limit: number = 60,
+  limit: number = 150,
   minCitations: number = 0
 ): Promise<SubgraphResponse> {
   const params = new URLSearchParams();
