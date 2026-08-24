@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: research_graph_gap_finder
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - COGNODB_URI=${COGNODB_URI:-bolt+s://db-9ff2fc64.bravo.databases.cognodb.com}
+      - COGNODB_USER=${COGNODB_USER:-cognodb}
+      - COGNODB_PASSWORD=${COGNODB_PASSWORD:-489f2ca41624df8bdf8def1d08c5ec85}
+      - S2_API_KEY=${S2_API_KEY:-}
+      - HOST=0.0.0.0
+      - PORT=8000
+    env_file:
+      - .env
